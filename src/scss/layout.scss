@@ -1,0 +1,29 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.App {
+  .navbar-expand {
+    padding: 0px;
+  }
+  .navbar {
+    background-color: #fff;
+    .container {
+      font-weight: 300;
+      border-bottom: 1px solid #111;
+      padding: 10px 0 10px 0;
+      .navbar-brand {
+        letter-spacing: 0.8px;
+        font-weight: 400;
+      }
+    }
+  }
+  .main-bg {
+    height: 350px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-image: url(../shoe.png);
+  }
+}
