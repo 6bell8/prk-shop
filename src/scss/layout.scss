@@ -16,6 +16,13 @@ body {
         letter-spacing: 0.8px;
         font-weight: 400;
       }
+      .row {
+        .col-md-4 {
+          .subBg01 {
+            height: 200px;
+          }
+        }
+      }
     }
   }
   .main-bg {
@@ -24,6 +31,6 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    background-image: url(../shoe.png);
+    // background-image: url("../img/shoe.png");
   }
 }

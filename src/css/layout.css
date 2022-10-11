@@ -21,11 +21,14 @@ body {
   font-weight: 400;
 }
 
+.App .navbar .container .row .col-md-4 .subBg01 {
+  height: 200px;
+}
+
 .App .main-bg {
   height: 350px;
   width: 100%;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-image: url(../shoe.png);
 }
