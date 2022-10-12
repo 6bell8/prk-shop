@@ -48,14 +48,9 @@ function App() {
             <h4>{shoes[2].title}</h4>
             <p>{shoes[2].price}</p>
           </div> */}
-          {shoes.map(function (a, i) {
-            return (
-              <div className="col-md-4" key={i}>
-                <img src={process.env.PUBLIC_URL + shoes[i].img} width="80%" />
-                <h4>{shoes[i].title}</h4>
-                <p>{shoes[i].price}</p>
-              </div>
-            );
+
+          {shoes.map((a, i) => {
+            return <Card shoes={shoes[i]}></Card>;
           })}
         </div>
       </div>
@@ -63,4 +58,23 @@ function App() {
   );
 }
 
+function Card(props) {
+  return (
+    <div className="col-md-4">
+      <img src={process.env.PUBLIC_URL + props.shoes.img} width="80%" />
+      <h4>{props.shoes.title}</h4>
+      <p>{props.shoes.price}</p>
+    </div>
+  );
+}
+
 export default App;
+
+//props문항에 i를 생성해서 컴포넌트에 던져줄 때 방식
+
+// i = {1}
+// i = {2}
+// i = {3}
+
+// src = https:naver{props.i(1 ~ 3표기)}.com
+// src = {'https:naver'+ props.i +'.jpg''.com'}
