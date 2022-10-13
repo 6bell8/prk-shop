@@ -7,7 +7,7 @@ let data = [
     title: "White and Black",
     content: "Born in France",
     price: 120000,
-    img: "/subBg01.jpg",
+    img: "../subBg01.jpg", //public 폴더에 있을 때 이렇게 표시
   },
 
   {
