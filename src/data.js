@@ -8,6 +8,7 @@ let data = [
     content: "Born in France",
     price: 120000,
     img: "../subBg01.jpg", //public 폴더에 있을 때 이렇게 표시
+    cord: 0,
   },
 
   {
@@ -16,6 +17,7 @@ let data = [
     content: "Born in Seoul",
     price: 110000,
     img: "/subBg02.jpg",
+    cord: 1,
   },
 
   {
@@ -24,6 +26,7 @@ let data = [
     content: "Born in the States",
     price: 130000,
     img: "/subBg03.jpg",
+    cord: 2,
   },
 ];
 

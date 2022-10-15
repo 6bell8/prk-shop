@@ -10,7 +10,10 @@ import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail.js";
 
 function App() {
-  let [shoes] = useState(data);
+  let [shoes, changeshoes] = useState(data);
+  // let shoesFind = props.shoes.find(function (shoes) {
+  //   return 상품.id == id;
+  // });
   let navigate = useNavigate(); //일반적으로 함수형태 훅은 변수에 저장 Nav.Link onClick{()={변수명("/")}} 이런식으로 조작
 
   return (
@@ -52,8 +55,6 @@ function App() {
         </Container>
       </Navbar>
 
-      <Link></Link>
-
       <Routes>
         <Route
           path="/"
@@ -66,13 +67,14 @@ function App() {
               <div className="container">
                 <div className="row">
                   {shoes.map((a, i) => {
-                    return <Card shoes={shoes[i]}></Card>;
+                    return <Card key={i} shoes={shoes[i]}></Card>;
                   })}
                 </div>
               </div>
             </>
           }
         />
+
         <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
 
         {/* nested 문법 핵심은 Route 괄호를 열어서 구성, path 앞부분은 제외 */}
