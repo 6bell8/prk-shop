@@ -8,12 +8,14 @@ import bg from "./img/shoe.png";
 import data from "./data.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail.js";
+import axios from "axios";
 
 function App() {
   let [shoes, changeshoes] = useState(data);
   // let shoesFind = props.shoes.find(function (shoes) {
   //   return 상품.id == id;
   // });
+  let [isAdd, setIsAdd] = useState([]);
   let navigate = useNavigate(); //일반적으로 함수형태 훅은 변수에 저장 Nav.Link onClick{()={변수명("/")}} 이런식으로 조작
 
   return (
@@ -69,8 +71,27 @@ function App() {
                   {shoes.map((a, i) => {
                     return <Card key={i} shoes={shoes[i]}></Card>;
                   })}
+                  {isAdd.map((a, i) => {
+                    return <AddCard key={i} data={data[i]}></AddCard>;
+                  })}
                 </div>
               </div>
+              <button
+                onClick={() => [
+                  axios
+                    .get("https://codingapple1.github.io/shop/data2.json")
+                    .then((result) => {
+                      console.log(result.data);
+                      setIsAdd(result.data);
+                    })
+                    .catch(() => {
+                      console.log("실패했어용");
+                      // catch는 if else의 문법과 비슷함
+                    }),
+                ]}
+              >
+                버튼
+              </button>
             </>
           }
         />
@@ -121,6 +142,16 @@ function Card(props) {
       <img src={process.env.PUBLIC_URL + props.shoes.img} width="80%" />
       <h4>{props.shoes.title}</h4>
       <p>{props.shoes.price}</p>
+    </div>
+  );
+}
+
+function AddCard(props) {
+  return (
+    <div className="col-md-4">
+      <img src={process.env.PUBLIC_URL + props.data.img} width="80%" />
+      <h4>{props.data.title}</h4>
+      <p>{props.data.price}</p>
     </div>
   );
 }
