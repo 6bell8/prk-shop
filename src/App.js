@@ -11,7 +11,7 @@ import Detail from "./routes/Detail.js";
 import axios from "axios";
 
 function App() {
-  let [shoes, changeshoes] = useState(data);
+  let [shoes, setShoes] = useState(data);
   // let shoesFind = props.shoes.find(function (shoes) {
   //   return 상품.id == id;
   // });
@@ -71,23 +71,32 @@ function App() {
                   {shoes.map((a, i) => {
                     return <Card key={i} shoes={shoes[i]}></Card>;
                   })}
-                  {isAdd.map((a, i) => {
-                    return <AddCard key={i} data={data[i]}></AddCard>;
-                  })}
                 </div>
               </div>
               <button
                 onClick={() => [
+                  //로딩 중 UI  띄우기
                   axios
                     .get("https://codingapple1.github.io/shop/data2.json")
                     .then((result) => {
                       console.log(result.data);
-                      setIsAdd(result.data);
+                      //가져온 데이터를 shoes라는 데이터에 추가해주세요
+                      // []에서 알맹이만 벗겨서 {} 형태로 남김 ... 괄호를 벗겨주는 문법
+                      let copy = [...shoes, ...result.data];
+                      setShoes(copy);
+                      //로딩 중 UI  띄우기
                     })
                     .catch(() => {
                       console.log("실패했어용");
                       // catch는 if else의 문법과 비슷함
+                      //로딩 중 UI  띄우기
                     }),
+
+                  Promise.all([axios.get("/url1"), axios.get("/url2")]).then(
+                    () => {
+                      //이후 결과값을 알려주는 기능
+                    }
+                  ),
                 ]}
               >
                 버튼
@@ -142,16 +151,6 @@ function Card(props) {
       <img src={process.env.PUBLIC_URL + props.shoes.img} width="80%" />
       <h4>{props.shoes.title}</h4>
       <p>{props.shoes.price}</p>
-    </div>
-  );
-}
-
-function AddCard(props) {
-  return (
-    <div className="col-md-4">
-      <img src={process.env.PUBLIC_URL + props.data.img} width="80%" />
-      <h4>{props.data.title}</h4>
-      <p>{props.data.price}</p>
     </div>
   );
 }
