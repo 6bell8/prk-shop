@@ -50,7 +50,7 @@ function Detail(props) {
   let [count, setCount] = useState(0);
   // let [alert, setAlert] = useState(true);
   let { id } = useParams();
-  let 찾은상품 = props.shoes.find((x) => x.cord == id);
+  let 찾은상품 = props.shoes.find((x) => x.id == id);
 
   return (
     <div className="container">

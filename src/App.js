@@ -7,7 +7,9 @@ import "./css/layout.css";
 import bg from "./img/shoe.png";
 import data from "./data.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
+import styled from "styled-components";
 import Detail from "./routes/Detail.js";
+import Loading from "./routes/Loading";
 import axios from "axios";
 
 function App() {
@@ -16,8 +18,8 @@ function App() {
   //   return 상품.id == id;
   // });
   let [isAdd, setIsAdd] = useState([]);
+  let [loading, setLoading] = useState(true);
   let navigate = useNavigate(); //일반적으로 함수형태 훅은 변수에 저장 Nav.Link onClick{()={변수명("/")}} 이런식으로 조작
-
   return (
     <div className="App">
       <Navbar bg="light" variant="light">
@@ -66,7 +68,7 @@ function App() {
                 className="main-bg"
                 style={{ backgroundImage: "url(" + bg + ")" }}
               ></div>
-              <div className="container">
+              <div className="container02">
                 <div className="row">
                   {shoes.map((a, i) => {
                     return <Card key={i} shoes={shoes[i]}></Card>;
@@ -77,9 +79,10 @@ function App() {
                 onClick={() => [
                   //로딩 중 UI  띄우기
                   axios
-                    .get("https://codingapple1.github.io/shop/data2.json")
+                    .get(
+                      "https://gist.githubusercontent.com/6bell8/b54495cd5ef113c5e5048ca64876ee23/raw/31a3c7d77afd65c1f2c7122ff34f9b91b02a57c0/shoesData.json"
+                    )
                     .then((result) => {
-                      console.log(result.data);
                       //가져온 데이터를 shoes라는 데이터에 추가해주세요
                       // []에서 알맹이만 벗겨서 {} 형태로 남김 ... 괄호를 벗겨주는 문법
                       let copy = [...shoes, ...result.data];
@@ -92,14 +95,15 @@ function App() {
                       //로딩 중 UI  띄우기
                     }),
 
-                  Promise.all([axios.get("/url1"), axios.get("/url2")]).then(
-                    () => {
-                      //이후 결과값을 알려주는 기능
-                    }
-                  ),
+                  // Promise.all([axios.get("/url1"), axios.get("/url2")]).then(
+                  //   () => {
+                  //     //이후 결과값을 알려주는 기능
+                  //   }
+                  // ),
                 ]}
+                className="plusBtn"
               >
-                버튼
+                더보기
               </button>
             </>
           }

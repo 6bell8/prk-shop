@@ -6,6 +6,10 @@ a {
   text-decoration: none;
 }
 
+p {
+  margin-bottom: 0;
+}
+
 .App .navbar-expand {
   padding: 0px;
 }
@@ -43,26 +47,79 @@ a {
   color: #111;
 }
 
-.App .navbar .container .row {
-  padding: 10px;
-}
-
-.App .navbar .container .row .col-md-4 .subBg01 {
-  height: 200px;
-}
-
-.App .navbar .container .row .col-md-6 {
-  padding-top: 10px;
-}
-
 .App .main-bg {
   height: 350px;
   width: 100%;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.App .container02 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.App .container02 .row {
+  padding: 10px;
+  width: 80%;
+}
+
+.App .container02 .row .col-md-4 {
+  margin-top: 20px;
+}
+
+.App .container02 .row .col-md-4 img {
+  width: clamp(180px, 17vw, 400px);
+  height: clamp(120px, 23vh, 200px);
+  border-radius: 20px;
+}
+
+.App .container02 .row .col-md-4 h4 {
+  margin-top: 10px;
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.App .container02 .row .col-md-4 p {
+  margin-bottom: 5px;
+}
+
+.App .container02 .row .col-md-6 {
+  padding-top: 10px;
+}
+
+.App .plusBtn {
+  width: 80px;
+  height: 40px;
+  margin: auto 0;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  background-color: #fff;
 }
 
 .alertNone {
   display: none;
+}
+
+@media all and (max-width: 767px) {
+  .App .container02 .row .col-md-4 img {
+    width: clamp(320px, 17vw, 400px);
+    height: clamp(200px, 23vh, 250px);
+  }
+  .App .container02 .row .col-md-4 h4 {
+    margin-top: 10px;
+    font-weight: 300;
+    font-size: 16px;
+  }
+  .App .container02 .row .col-md-4 p {
+    font-style: italic;
+    font-weight: 400;
+  }
 }
