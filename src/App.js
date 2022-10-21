@@ -80,7 +80,7 @@ function App() {
                   //로딩 중 UI  띄우기
                   axios
                     .get(
-                      "https://gist.githubusercontent.com/6bell8/b54495cd5ef113c5e5048ca64876ee23/raw/31a3c7d77afd65c1f2c7122ff34f9b91b02a57c0/shoesData.json"
+                      "https://gist.githubusercontent.com/6bell8/b54495cd5ef113c5e5048ca64876ee23/raw/a3659fd582e4ede9ee4c7b6482de324915bacf82/shoesData.json"
                     )
                     .then((result) => {
                       //가져온 데이터를 shoes라는 데이터에 추가해주세요

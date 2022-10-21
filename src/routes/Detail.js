@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Nav } from "react-bootstrap";
 
 // import styled from "styled-components";
 
@@ -38,7 +39,9 @@ function Detail(props) {
   //   []
   //   // []에 변수가 변할 때만 실행이 되는 조건을 넣을 수 있다. 혹은 []를 설정해놓으면 변하지않는다. unEffect가 실행 되지않는다.
   // );
+  //3가지 종류를 표현 할 수 있는 숫자를 state로 표현
 
+  let [탭, 탭변경] = useState(0);
   let [num, setNum] = useState("");
 
   useEffect(() => {
@@ -83,8 +86,45 @@ function Detail(props) {
           <button className="btn btn-danger">주문하기</button>
         </div>
       </div>
+
+      <Nav variant="tabs" defaultActiveKey="link0">
+        <Nav.Item>
+          <Nav.Link onClick={() => [탭변경(0)]} eventKey="link0">
+            버튼1
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link onClick={() => [탭변경(1)]} eventKey="link1">
+            버튼2
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link onClick={() => [탭변경(2)]} eventKey="link2">
+            버튼3
+          </Nav.Link>
+        </Nav.Item>
+      </Nav>
+      <TabContent 탭={탭}></TabContent>
     </div>
   );
+}
+
+//else if 세개이상 지문이 있을 때 이게 아니면 else if로 진행해주세요 라는 의미
+
+// component는 반드시 return문을 추가해서 작성을 해야합니다.
+
+//{탭}을 props에 넣어줘도 괜찮다
+function TabContent({ 탭 }) {
+  // if (탭 == 0) {
+  //   return <div>내용0</div>;
+  // }
+  // if (탭 == 1) {
+  //   return <div>내용1</div>;
+  // }
+  // if (탭 == 2) {
+  //   return <div>내용2</div>;
+  // }
+  return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭];
 }
 
 export default Detail;
