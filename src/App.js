@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import { Button, Navbar, Container, Nav, Row, Col } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import "./css/layout.css";
 import bg from "./img/shoe.png";
@@ -19,9 +19,22 @@ function App() {
   // });
   let [isAdd, setIsAdd] = useState([]);
   let [loading, setLoading] = useState(true);
+  let [fade, setFade] = useState("");
+  let [plus, setPlus] = useState(0);
+
   let navigate = useNavigate(); //일반적으로 함수형태 훅은 변수에 저장 Nav.Link onClick{()={변수명("/")}} 이런식으로 조작
+
+  useEffect(() => {
+    setTimeout(() => {
+      setFade("end");
+    }, 1000);
+    return () => {
+      setFade("");
+    };
+  }, []);
+
   return (
-    <div className="App">
+    <div className={`App start ${fade}`}>
       <Navbar bg="light" variant="light">
         <Container>
           <Navbar.Brand href="#home">Prkshop</Navbar.Brand>
@@ -103,12 +116,13 @@ function App() {
                 ]}
                 className="plusBtn"
               >
+                {/* useEffect로 1번 이상 클릭하면 button display none 처리하기 */}
                 더보기
               </button>
             </>
           }
         />
-
+        {/* //shoes를 data.js에서 받아오지않고 json 형식으로 서비에서 받아오기때문에 도메인이 안뜸 */}
         <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
 
         {/* nested 문법 핵심은 Route 괄호를 열어서 구성, path 앞부분은 제외 */}

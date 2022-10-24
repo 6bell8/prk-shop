@@ -104,6 +104,26 @@ p {
   background-color: #fff;
 }
 
+.App .start {
+  opacity: 0;
+}
+
+.App .end {
+  opacity: 1;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.start {
+  opacity: 0;
+}
+
+.end {
+  opacity: 1;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
 .alertNone {
   display: none;
 }

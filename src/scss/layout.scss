@@ -48,6 +48,7 @@ p {
     border-bottom: 1px solid #ccc;
     // background-image: url("../img/shoe.png");
   }
+
   .container02 {
     display: flex;
     justify-content: center;
@@ -84,6 +85,21 @@ p {
     border: 2px solid #ccc;
     background-color: #fff;
   }
+  .start {
+    opacity: 0;
+  }
+  .end {
+    opacity: 1;
+    transition: all 0.5s;
+  }
+}
+
+.start {
+  opacity: 0;
+}
+.end {
+  opacity: 1;
+  transition: all 0.5s;
 }
 
 .alertNone {
