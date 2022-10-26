@@ -175,7 +175,7 @@ function Card(props) {
 
 export default App;
 
-//props문항에 i를 생성해서 컴포넌트에 던져줄 때 방식
+//props문항에 i를 생성해서 컴포넌트에 던져줄 때 방식입니다.
 
 // i = {1}
 // i = {2}
