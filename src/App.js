@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import { Button, Navbar, Container, Nav, Row, Col } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 import "./App.css";
 import "./css/layout.css";
 import bg from "./img/shoe.png";
@@ -12,8 +12,11 @@ import Detail from "./routes/Detail.js";
 import Loading from "./routes/Loading";
 import axios from "axios";
 
+export let Context1 = createContext(); // state보관함
+
 function App() {
   let [shoes, setShoes] = useState(data);
+  let [재고] = useState([10, 11, 12]);
   // let shoesFind = props.shoes.find(function (shoes) {
   //   return 상품.id == id;
   // });
@@ -48,7 +51,7 @@ function App() {
             </Nav.Link>
             <Nav.Link
               onClick={() => {
-                navigate("/detail");
+                navigate("/detail/1");
               }}
             >
               Detail
@@ -56,7 +59,7 @@ function App() {
 
             <Nav.Link
               onClick={() => {
-                navigate("/detail");
+                navigate("/detail/1");
               }}
             >
               Cart
@@ -123,7 +126,15 @@ function App() {
           }
         />
         {/* //shoes를 data.js에서 받아오지않고 json 형식으로 서비에서 받아오기때문에 도메인이 안뜸 */}
-        <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
+        {/* Context1 이라는 보관함으로 state를 보관할 대상을 element안에서 묶어준다. */}
+        <Route
+          path="/detail/:id"
+          element={
+            <Context1.Provider value={{ 재고, shoes }}>
+              <Detail shoes={shoes} />
+            </Context1.Provider>
+          }
+        />
 
         {/* nested 문법 핵심은 Route 괄호를 열어서 구성, path 앞부분은 제외 */}
         <Route path="/about" element={<About />}>

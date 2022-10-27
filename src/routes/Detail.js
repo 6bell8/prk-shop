@@ -1,8 +1,9 @@
 /* eslint-disable */
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Nav } from "react-bootstrap";
+import { Context1 } from "./../App.js";
 
 // import styled from "styled-components";
 
@@ -26,7 +27,7 @@ function Detail(props) {
 
       let a = setTimeout(() => {
         setAlert(false);
-      }, 4000);
+      }, 5000);
       return () => {
         //useEffect 실행이 되기 전에 return code가 실행이 먼저된다.
         //브라우저 내에 타이머가 여러 개가 있을 때 기존에 있는 타이머를 제거하고 사용하면 보다 효율적이다. // 소위 clean up function
@@ -39,6 +40,8 @@ function Detail(props) {
     []
     // []에 변수가 변할 때만 실행이 되는 조건을 넣을 수 있다. 혹은 []를 설정해놓으면 변하지않는다. unEffect가 실행 되지않는다.
   );
+
+  let { 재고, shoes } = useContext(Context1);
 
   //3가지 종류를 표현 할 수 있는 숫자를 state로 표현
   let [탭, 탭변경] = useState(0);
@@ -80,6 +83,7 @@ function Detail(props) {
       >
         버튼
       </button>
+
       <div className="row">
         <div className="col-md-6">
           <img src={찾은상품.img} width="100%" />
@@ -93,6 +97,7 @@ function Detail(props) {
           <h4 className="pt-5">{찾은상품.title}</h4>
           <p>{찾은상품.content}</p>
           <p>{찾은상품.price}원</p>
+          <p> {재고}</p>
           <button className="btn btn-danger">주문하기</button>
         </div>
       </div>
@@ -114,16 +119,16 @@ function Detail(props) {
           </Nav.Link>
         </Nav.Item>
       </Nav>
-      <TabContent 탭={탭}></TabContent>
+      <TabContent 탭={탭} 재고={재고}></TabContent>
     </div>
   );
 }
 
 //else if 세개이상 지문이 있을 때 이게 아니면 else if로 진행해주세요 라는 의미
 
-// component는 반드시 return문을 추가해서 작성을 해야합니다.
+// component는 반드시 return문을 추가해서 작성을 해야한다.
 
-//1. {탭}을 props에 넣어줘도 괜찮다 //2. 탭 state가 변할 떄 마다 end를 부착
+//1. {탭}을 props에 넣어줘도 괜찮다, prop없이 state를 import 할 수 있음 //2. 탭 state가 변할 떄 마다 end를 부착
 function TabContent({ 탭 }) {
   // if (탭 == 0) {
   //   return <div>내용0</div>;
@@ -138,6 +143,7 @@ function TabContent({ 탭 }) {
   //특정코드가 변할 때 마다 붙여주는 usestate
 
   let [fade01, setFade01] = useState("");
+  let { 재고 } = useContext(Context1);
 
   useEffect(() => {
     setTimeout(() => {
@@ -151,9 +157,10 @@ function TabContent({ 탭 }) {
   }, [탭]);
 
   // html이 길면 소괄호를 쳐주는 것이 안정적임
+  // 위 중괄호 안에 state를 넣었기 때문에 prop를 안 붙여줘도 된다.
   return (
     <div className={`start ${fade01}`}>
-      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭]}
+      {[<div>{재고}</div>, <div>내용1</div>, <div>내용2</div>][탭]}
     </div>
   );
 }
