@@ -11,6 +11,7 @@ import styled from "styled-components";
 import Detail from "./routes/Detail.js";
 import Loading from "./routes/Loading";
 import axios from "axios";
+import Cart from "./routes/Cart";
 
 export let Context1 = createContext(); // state보관함
 
@@ -127,14 +128,8 @@ function App() {
         />
         {/* //shoes를 data.js에서 받아오지않고 json 형식으로 서비에서 받아오기때문에 도메인이 안뜸 */}
         {/* Context1 이라는 보관함으로 state를 보관할 대상을 element안에서 묶어준다. */}
-        <Route
-          path="/detail/:id"
-          element={
-            <Context1.Provider value={{ 재고, shoes }}>
-              <Detail shoes={shoes} />
-            </Context1.Provider>
-          }
-        />
+        <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
+        <Route path="/cart" element={<Cart />} />
 
         {/* nested 문법 핵심은 Route 괄호를 열어서 구성, path 앞부분은 제외 */}
         <Route path="/about" element={<About />}>

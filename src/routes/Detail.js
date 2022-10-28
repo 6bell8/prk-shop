@@ -160,7 +160,7 @@ function TabContent({ 탭 }) {
   // 위 중괄호 안에 state를 넣었기 때문에 prop를 안 붙여줘도 된다.
   return (
     <div className={`start ${fade01}`}>
-      {[<div>{재고}</div>, <div>내용1</div>, <div>내용2</div>][탭]}
+      {[<div>{shoes[0].title}</div>, <div>내용1</div>, <div>내용2</div>][탭]}
     </div>
   );
 }

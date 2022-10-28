@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from "react";
 import { Background, LoadingText } from "./Style";
 import Spinner from "../assets/spinner.gif";
