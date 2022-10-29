@@ -60,7 +60,7 @@ function App() {
 
             <Nav.Link
               onClick={() => {
-                navigate("/detail/1");
+                navigate("/cart");
               }}
             >
               Cart
