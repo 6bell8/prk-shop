@@ -1,10 +1,11 @@
 /* eslint-disable */
 
 import { Table } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { changeCount, changeName } from "./../Store";
 
 function Cart() {
-  let a = useSelector(
+  let state = useSelector(
     (state) => state
 
     // (state) => state.stock
@@ -12,8 +13,13 @@ function Cart() {
     // {} return 동시 생략가능
   );
 
+  //Store에서 변경 할 함수를 import해와서 변수를 생성하고 useDispatch 함수는 store로 요청을 보내주는 함수라고 생각하면 된다.
+
+  let dispatch = useDispatch();
+
   return (
     <div>
+      {state.user}의 장바구니
       <Table>
         <thead>
           <tr>
@@ -24,27 +30,27 @@ function Cart() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>{a.product01.id}</td>
-            <td>{a.product01.name}</td>
-            <td>{a.product01.count}</td>
-          </tr>
+          {/* return 문이랑 {} 랑 동시에 생략가능 */}
+          {/* {반복문에 warning이 뜨는 이유는 key{i}를 입력하지않았기때문} */}
+          {state.product.map((a, i) => (
+            <tr key={i}>
+              <td>1</td>
+              <td>{state.product[i].id}</td>
+              <td>{state.product[i].name}</td>
+              <td>{state.product[i].count}</td>
+              <button
+                onClick={() => {
+                  dispatch(changeName());
+                }}
+              >
+                +
+              </button>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </div>
   );
 }
-
-// function Product(state) {
-//   return (
-//     <tr>
-//       <td>1</td>
-//       <td>{a.product01.id}</td>
-//       <td>{a.product01.name}</td>
-//       <td>{a.product01.count}</td>
-//     </tr>
-//   );
-// }
 
 export default Cart;
