@@ -3,8 +3,10 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Nav } from "react-bootstrap";
-import { Context1 } from "./../App.js";
-
+import data from "./../data.js";
+import { addItem } from "../Store";
+import { useDispatch } from "react-redux";
+// import { Context1 } from "./../App.js";
 // import styled from "styled-components";
 
 // let YellowBtn = styled.button`
@@ -41,11 +43,10 @@ function Detail(props) {
     // []에 변수가 변할 때만 실행이 되는 조건을 넣을 수 있다. 혹은 []를 설정해놓으면 변하지않는다. unEffect가 실행 되지않는다.
   );
 
-  let { 재고, shoes } = useContext(Context1);
-
   //3가지 종류를 표현 할 수 있는 숫자를 state로 표현
   let [탭, 탭변경] = useState(0);
   let [num, setNum] = useState("");
+  let dispatch = useDispatch();
 
   // useEffect(() => {
   //   if (isNaN(num) == true) {
@@ -55,8 +56,10 @@ function Detail(props) {
 
   let [count, setCount] = useState(0);
   let [alert, setAlert] = useState(true);
+
   let { id } = useParams();
   let 찾은상품 = props.shoes.find((x) => x.id == id);
+  // let { 재고, shoes } = useContext(Context1);
 
   let [Fade02, setFade02] = useState("");
 
@@ -97,8 +100,17 @@ function Detail(props) {
           <h4 className="pt-5">{찾은상품.title}</h4>
           <p>{찾은상품.content}</p>
           <p>{찾은상품.price}원</p>
-          <p> {재고}</p>
-          <button className="btn btn-danger">주문하기</button>
+          {/* <p> {재고}</p> */}
+          <button
+            className="btn btn-danger"
+            onClick={() => {
+              {
+                dispatch(addItem({ id: 1, name: 찾은상품.title, count: 1 }));
+              }
+            }}
+          >
+            주문하기
+          </button>
         </div>
       </div>
 
@@ -119,7 +131,7 @@ function Detail(props) {
           </Nav.Link>
         </Nav.Item>
       </Nav>
-      <TabContent 탭={탭} 재고={재고}></TabContent>
+      <TabContent 탭={탭} /*재고={재고}*/></TabContent>
     </div>
   );
 }
@@ -141,9 +153,9 @@ function TabContent({ 탭 }) {
   // }
 
   //특정코드가 변할 때 마다 붙여주는 usestate
-
+  let [shoes, setShoes] = useState(data);
   let [fade01, setFade01] = useState("");
-  let { 재고 } = useContext(Context1);
+  // let { 재고 } = useContext(Context1);
 
   useEffect(() => {
     setTimeout(() => {
@@ -160,7 +172,13 @@ function TabContent({ 탭 }) {
   // 위 중괄호 안에 state를 넣었기 때문에 prop를 안 붙여줘도 된다.
   return (
     <div className={`start ${fade01}`}>
-      {[<div>{shoes[0].title}</div>, <div>내용1</div>, <div>내용2</div>][탭]}
+      {
+        [
+          <div>{shoes[0].title}</div>,
+          <div>{shoes[1].title}</div>,
+          <div>{shoes[2].title}</div>,
+        ][탭]
+      }
     </div>
   );
 }

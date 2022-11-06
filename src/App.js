@@ -7,9 +7,7 @@ import "./css/layout.css";
 import bg from "./img/shoe.png";
 import data from "./data.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
-import styled from "styled-components";
 import Detail from "./routes/Detail.js";
-import Loading from "./routes/Loading";
 import axios from "axios";
 import Cart from "./routes/Cart";
 

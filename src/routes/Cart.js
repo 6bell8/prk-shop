@@ -3,6 +3,7 @@
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { changeName, changeAge } from "./../store/userSlice";
+import { addCount } from "./../Store";
 
 function Cart() {
   let state = useSelector(
@@ -50,7 +51,8 @@ function Cart() {
               <td>{state.product[i].count}</td>
               <button
                 onClick={() => {
-                  dispatch(changeName());
+                  //payloads로 id를 전송 함
+                  dispatch(addCount(state.product[i].id));
                 }}
               >
                 +

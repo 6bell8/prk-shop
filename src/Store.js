@@ -24,7 +24,24 @@ let product = createSlice({
     { id: 0, name: "White and Black", count: 2 },
     { id: 2, name: "Grey Yordan", count: 1 },
   ],
+  reducers: {
+    addCount(state, action) {
+      // 하단의 파라미터는 state arr 안에 있는 데이터를 의미 함.
+      // 결론은 id가 같은 상품을 찾아서 state에 몇번째 항목인지 표시해주는 것.
+      let 번호 = state.findIndex((a) => {
+        return a.id == action.payload;
+      });
+    },
+    // 장바구니 추가하는 state
+    // 기존 배열에다가 action.payload를 통해서 배열추가
+    addItem(state, action) {
+      action.payload > 2 ? null : state.push(action.payload);
+    },
+  },
 });
+
+//Redux state는 state 함수를 따로 export 해주어야한다.
+export let { addCount, addItem } = product.actions;
 
 export default configureStore({
   reducer: {
