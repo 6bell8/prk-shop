@@ -31,17 +31,26 @@ let product = createSlice({
       let 번호 = state.findIndex((a) => {
         return a.id == action.payload;
       });
+      state[번호].count++;
     },
     // 장바구니 추가하는 state
     // 기존 배열에다가 action.payload를 통해서 배열추가
     addItem(state, action) {
-      action.payload > 2 ? null : state.push(action.payload);
+      state.push(action.payload);
+    },
+    //배열에서 남는 {},{} 값 삭제
+    removeItem(state, action) {
+      let 번호 = state.findIndex((a) => {
+        return a.id === action.payload;
+      });
+
+      state[번호] = delete state[번호];
     },
   },
 });
 
 //Redux state는 state 함수를 따로 export 해주어야한다.
-export let { addCount, addItem } = product.actions;
+export let { addCount, addItem, removeItem } = product.actions;
 
 export default configureStore({
   reducer: {
