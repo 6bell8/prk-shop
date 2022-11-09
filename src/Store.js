@@ -38,19 +38,24 @@ let product = createSlice({
     addItem(state, action) {
       state.push(action.payload);
     },
-    //배열에서 남는 {},{} 값 삭제
     removeItem(state, action) {
       let 번호 = state.findIndex((a) => {
         return a.id === action.payload;
       });
 
-      state[번호] = delete state[번호];
+      state.splice(번호, 1);
+    },
+    addQuantity(state, action) {
+      let 번호 = state.findIndex((a) => {
+        return a.id == action.payload;
+      });
+      state[번호].count++;
     },
   },
 });
 
 //Redux state는 state 함수를 따로 export 해주어야한다.
-export let { addCount, addItem, removeItem } = product.actions;
+export let { addCount, addItem, removeItem, addQuantity } = product.actions;
 
 export default configureStore({
   reducer: {

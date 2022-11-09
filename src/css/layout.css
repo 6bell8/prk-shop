@@ -128,6 +128,10 @@ p {
   display: none;
 }
 
+.table thead {
+  border-bottom: solid 1px #ccc;
+}
+
 @media all and (max-width: 767px) {
   .App .container02 .row .col-md-4 img {
     width: clamp(320px, 17vw, 400px);

@@ -20,9 +20,10 @@ function App() {
   //   return 상품.id == id;
   // });
   let [isAdd, setIsAdd] = useState([]);
-  let [loading, setLoading] = useState(true);
+  //let [loadalert, setLoadalert] = useState(true);
   let [fade, setFade] = useState("");
   let [plus, setPlus] = useState(0);
+  let [count, setCount] = useState(0);
 
   let navigate = useNavigate(); //일반적으로 함수형태 훅은 변수에 저장 Nav.Link onClick{()={변수명("/")}} 이런식으로 조작
 
@@ -93,22 +94,25 @@ function App() {
               <button
                 onClick={() => [
                   //로딩 중 UI  띄우기
-                  axios
-                    .get(
-                      "https://gist.githubusercontent.com/6bell8/b54495cd5ef113c5e5048ca64876ee23/raw/a3659fd582e4ede9ee4c7b6482de324915bacf82/shoesData.json"
-                    )
-                    .then((result) => {
-                      //가져온 데이터를 shoes라는 데이터에 추가해주세요
-                      // []에서 알맹이만 벗겨서 {} 형태로 남김 ... 괄호를 벗겨주는 문법
-                      let copy = [...shoes, ...result.data];
-                      setShoes(copy);
-                      //로딩 중 UI  띄우기
-                    })
-                    .catch(() => {
-                      console.log("실패했어용");
-                      // catch는 if else의 문법과 비슷함
-                      //로딩 중 UI  띄우기
-                    }),
+                  count == 0
+                    ? axios
+                        .get(
+                          "https://gist.githubusercontent.com/6bell8/b54495cd5ef113c5e5048ca64876ee23/raw/a3659fd582e4ede9ee4c7b6482de324915bacf82/shoesData.json"
+                        )
+
+                        .then((result) => {
+                          //가져온 데이터를 shoes라는 데이터에 추가해주세요
+                          // []에서 알맹이만 벗겨서 {} 형태로 남김 ... 괄호를 벗겨주는 문법
+                          let copy = [...shoes, ...result.data];
+                          setShoes(copy);
+                          setCount(count + 1);
+                        })
+                        .catch(() => {
+                          console.log("실패했어용");
+                          // catch는 if else의 문법과 비슷함
+                          //로딩 중 UI  띄우기
+                        })
+                    : null,
 
                   // Promise.all([axios.get("/url1"), axios.get("/url2")]).then(
                   //   () => {
@@ -119,7 +123,7 @@ function App() {
                 className="plusBtn"
               >
                 {/* useEffect로 1번 이상 클릭하면 button display none 처리하기 */}
-                더보기
+                {count == 0 ? <div>더보기</div> : <p>Last</p>}
               </button>
             </>
           }

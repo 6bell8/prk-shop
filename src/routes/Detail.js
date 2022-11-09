@@ -4,8 +4,8 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 import data from "./../data.js";
-import { addItem } from "../Store";
-import { useDispatch } from "react-redux";
+import { addItem, addQuantity } from "../Store";
+import { useDispatch, useSelector } from "react-redux";
 // import { Context1 } from "./../App.js";
 // import styled from "styled-components";
 
@@ -21,6 +21,22 @@ import { useDispatch } from "react-redux";
 // `;
 
 function Detail(props) {
+  let state = useSelector(
+    (state) => state
+
+    // (state) => state.stock
+    // state.stock ,user 으로 프로퍼티를 가져와서 개별적으로 사용할 수 있다.
+    // {} return 동시 생략가능
+  );
+
+  let order = () => {
+    const dupValue = state.product.findIndex((x) => x.id === 찾은상품.id);
+
+    dupValue !== -1
+      ? dispatch(addQuantity(state.product[dupValue].id))
+      : dispatch(addItem({ id: 찾은상품.id, name: 찾은상품.title, count: 1 }));
+  };
+
   useEffect(
     () => {
       //mount update시에 실행 되는 hook
@@ -105,7 +121,7 @@ function Detail(props) {
             className="btn btn-danger"
             onClick={() => {
               {
-                dispatch(addItem({ id: 1, name: 찾은상품.title, count: 1 }));
+                dispatch(order);
               }
             }}
           >
