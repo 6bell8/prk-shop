@@ -11,9 +11,21 @@ import Detail from "./routes/Detail.js";
 import axios from "axios";
 import Cart from "./routes/Cart";
 
-export let Context1 = createContext(); // state보관함
+// export let Context1 = createContext(); // state보관함
 
 function App() {
+  let obj = { name: "kim" };
+  localStorage.setItem("data", JSON.stringify(obj));
+  let drow = localStorage.getItem("data");
+
+  console.log(JSON.parse(drow).name);
+
+  // 상세페이지에서 봤던 상품의 번호들을 localStorage에 저장하기
+
+  useEffect(() => {
+    localStorage.setItem("watch", JSON.stringify([]));
+  }, []);
+
   let [shoes, setShoes] = useState(data);
   let [재고] = useState([10, 11, 12]);
   // let shoesFind = props.shoes.find(function (shoes) {
