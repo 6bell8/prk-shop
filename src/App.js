@@ -8,6 +8,7 @@ import bg from "./img/shoe.png";
 import data from "./data.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail.js";
+import Loading from "./routes/Loading";
 import axios from "axios";
 import Cart from "./routes/Cart";
 
@@ -20,10 +21,12 @@ function App() {
 
   console.log(JSON.parse(drow).name);
 
-  // 상세페이지에서 봤던 상품의 번호들을 localStorage에 저장하기
+  // useEffect 내에서 if문 사용가능
 
   useEffect(() => {
-    localStorage.setItem("watch", JSON.stringify([]));
+    if (localStorage.getItem("watched" === null)) {
+      localStorage.setItem("watched", JSON.stringify([]));
+    }
   }, []);
 
   let [shoes, setShoes] = useState(data);
@@ -32,7 +35,7 @@ function App() {
   //   return 상품.id == id;
   // });
   let [isAdd, setIsAdd] = useState([]);
-  //let [loadalert, setLoadalert] = useState(true);
+  let [loading, setLoading] = useState(false);
   let [fade, setFade] = useState("");
   let [plus, setPlus] = useState(0);
   let [count, setCount] = useState(0);
@@ -52,7 +55,13 @@ function App() {
     <div className={`App start ${fade}`}>
       <Navbar bg="light" variant="light">
         <Container>
-          <Navbar.Brand href="#home">Prkshop</Navbar.Brand>
+          <Navbar.Brand
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Prkshop
+          </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link
               onClick={() => {
@@ -103,6 +112,9 @@ function App() {
                   })}
                 </div>
               </div>
+
+              {loading == true ? <Loading></Loading> : null}
+
               <button
                 onClick={() => [
                   //로딩 중 UI  띄우기
@@ -115,12 +127,14 @@ function App() {
                         .then((result) => {
                           //가져온 데이터를 shoes라는 데이터에 추가해주세요
                           // []에서 알맹이만 벗겨서 {} 형태로 남김 ... 괄호를 벗겨주는 문법
+
                           let copy = [...shoes, ...result.data];
                           setShoes(copy);
                           setCount(count + 1);
                         })
                         .catch(() => {
                           console.log("실패했어용");
+                          setLoading(false);
                           // catch는 if else의 문법과 비슷함
                           //로딩 중 UI  띄우기
                         })

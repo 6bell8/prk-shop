@@ -49,9 +49,7 @@ function Detail(props) {
       return () => {
         //useEffect 실행이 되기 전에 return code가 실행이 먼저된다.
         //브라우저 내에 타이머가 여러 개가 있을 때 기존에 있는 타이머를 제거하고 사용하면 보다 효율적이다. // 소위 clean up function
-
         // 기존 서버에 데이터를 요청하는 경우 기존 데이터를 지우지않으면 반복되기때문에 return 함수에서 요청을해서 지우면 좋다
-        console.log(1);
         // clearTimeout(a);
       };
     },
@@ -64,11 +62,22 @@ function Detail(props) {
   let [num, setNum] = useState("");
   let dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (isNaN(num) == true) {
-  //     alert("그러지마세요");
-  //   }
-  // }, [num]);
+  useEffect(() => {
+    // localStorage data 안에 있는 배열을 수정하려면, getItem으로 꺼내서 바꿔줌
+
+    // 키값 변수처리
+    let 꺼낸거 = localStorage.getItem("watched");
+    //JSON 파일을 오브젝트로 바꿔줌
+    꺼낸거 = JSON.parse(꺼낸거);
+    // 해당되는 상품의 id값을 push
+    꺼낸거.push(찾은상품.id);
+    // localStorage.setItem으로 다시 지정
+    꺼낸거 = new Set(꺼낸거);
+    // 앝은 복사해서 배열을 새로 만드는 것 Array.from
+    꺼낸거 = Array.from(꺼낸거);
+    // localStorage.setItem으로 다시 지정, JSON.stringify로 해야 object가 꺠지지않음
+    localStorage.setItem("watched", JSON.stringify(꺼낸거));
+  }, []);
 
   let [count, setCount] = useState(0);
   let [alert, setAlert] = useState(true);
