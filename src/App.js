@@ -24,9 +24,15 @@ function App() {
   // useEffect 내에서 if문 사용가능
 
   useEffect(() => {
-    if (localStorage.getItem("watched" === null)) {
+    if (localStorage.getItem("watched") === null) {
       localStorage.setItem("watched", JSON.stringify([]));
     }
+
+    // 풀어야 됨
+    // let watched = JSON.parse(localStorage.getItem("watched"));
+    // watched.unshifted(id);
+    // watched = [...new Set(watched)].slice(0, 3);
+    // localStorage.setItem("watched", JSON.stringify(watched));
   }, []);
 
   let [shoes, setShoes] = useState(data);
@@ -39,7 +45,7 @@ function App() {
   let [fade, setFade] = useState("");
   let [plus, setPlus] = useState(0);
   let [count, setCount] = useState(0);
-
+  let [shoesAll, setShoesAll] = useState(data);
   let navigate = useNavigate(); //일반적으로 함수형태 훅은 변수에 저장 Nav.Link onClick{()={변수명("/")}} 이런식으로 조작
 
   useEffect(() => {
@@ -97,6 +103,10 @@ function App() {
       </Navbar>
 
       <Routes>
+        {/* <Route exact path="/">
+          < shoes={shoes} setShoes={setShoes} shoesAll={shoesAll}></>
+        </Route> */}
+
         <Route
           path="/"
           element={
@@ -158,7 +168,6 @@ function App() {
         {/* Context1 이라는 보관함으로 state를 보관할 대상을 element안에서 묶어준다. */}
         <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
         <Route path="/cart" element={<Cart />} />
-
         {/* nested 문법 핵심은 Route 괄호를 열어서 구성, path 앞부분은 제외 */}
         <Route path="/about" element={<About />}>
           <Route path="member" element={<div>멤버이름</div>} />

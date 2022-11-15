@@ -73,7 +73,7 @@ function Detail(props) {
     꺼낸거.push(찾은상품.id);
     // localStorage.setItem으로 다시 지정
     꺼낸거 = new Set(꺼낸거);
-    // 앝은 복사해서 배열을 새로 만드는 것 Array.from
+    // 앝은 복사해서 배열을 새로 만드는 것 Array.from, set 중복제거!
     꺼낸거 = Array.from(꺼낸거);
     // localStorage.setItem으로 다시 지정, JSON.stringify로 해야 object가 꺠지지않음
     localStorage.setItem("watched", JSON.stringify(꺼낸거));
