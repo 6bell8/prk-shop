@@ -17,9 +17,8 @@ import Cart from "./routes/Cart";
 function App() {
   let obj = { name: "kim" };
   localStorage.setItem("data", JSON.stringify(obj));
-  let drow = localStorage.getItem("data");
-
-  console.log(JSON.parse(drow).name);
+  let 꺼낸거 = JSON.parse(localStorage.getItem("watched"));
+  let 꺼낸거2 = JSON.parse(localStorage.getItem("watched2"));
 
   // useEffect 내에서 if문 사용가능
 
@@ -27,12 +26,15 @@ function App() {
     if (localStorage.getItem("watched") === null) {
       localStorage.setItem("watched", JSON.stringify([]));
     }
+    if (localStorage.getItem("watched2") === null) {
+      localStorage.setItem("watched2", JSON.stringify([]));
+    }
+  }, []);
 
-    // 풀어야 됨
-    // let watched = JSON.parse(localStorage.getItem("watched"));
-    // watched.unshifted(id);
-    // watched = [...new Set(watched)].slice(0, 3);
-    // localStorage.setItem("watched", JSON.stringify(watched));
+  useEffect(() => {
+    꺼낸거 === null
+      ? localStorage.setItem("watched", JSON.stringify([]))
+      : null;
   }, []);
 
   let [shoes, setShoes] = useState(data);
@@ -103,10 +105,6 @@ function App() {
       </Navbar>
 
       <Routes>
-        {/* <Route exact path="/">
-          < shoes={shoes} setShoes={setShoes} shoesAll={shoesAll}></>
-        </Route> */}
-
         <Route
           path="/"
           element={
@@ -115,6 +113,20 @@ function App() {
                 className="main-bg"
                 style={{ backgroundImage: "url(" + bg + ")" }}
               ></div>
+              <div className="cartBox">
+                <p style={{ margin: "10px" }}>최근 본 상품</p>
+
+                {꺼낸거 !== null
+                  ? 꺼낸거.map((a, i) => {
+                      return (
+                        <div className="watchedItem" key={i}>
+                          <img src={`${꺼낸거[i]}`} className="localImg"></img>
+                          <p className="name">{꺼낸거2[i]}</p>
+                        </div>
+                      );
+                    })
+                  : null}
+              </div>
               <div className="container02">
                 <div className="row">
                   {shoes.map((a, i) => {
@@ -159,7 +171,7 @@ function App() {
                 className="plusBtn"
               >
                 {/* useEffect로 1번 이상 클릭하면 button display none 처리하기 */}
-                {count == 0 ? <div>더보기</div> : <p>Last</p>}
+                {count == 0 ? <div>상품 더 보기</div> : <p>마지막 페이지</p>}
               </button>
             </>
           }

@@ -6,19 +6,6 @@ import { Nav } from "react-bootstrap";
 import data from "./../data.js";
 import { addItem, addQuantity } from "../Store";
 import { useDispatch, useSelector } from "react-redux";
-// import { Context1 } from "./../App.js";
-// import styled from "styled-components";
-
-// let YellowBtn = styled.button`
-//   background: ${(props) => props.bg};
-//   color: ${(props) => (props.bg == "blue" ? "white" : "black")};
-//   padding: 10px;
-// `;
-
-// let Box = styled.div`
-//   background: grey;
-//   padding: 20px;
-// `;
 
 function Detail(props) {
   let state = useSelector(
@@ -67,16 +54,22 @@ function Detail(props) {
 
     // 키값 변수처리
     let 꺼낸거 = localStorage.getItem("watched");
+    let 꺼낸거2 = localStorage.getItem("watched2");
     //JSON 파일을 오브젝트로 바꿔줌
     꺼낸거 = JSON.parse(꺼낸거);
+    꺼낸거2 = JSON.parse(꺼낸거2);
     // 해당되는 상품의 id값을 push
-    꺼낸거.push(찾은상품.id);
+    꺼낸거.push(찾은상품.img);
+    꺼낸거2.push(찾은상품.title);
     // localStorage.setItem으로 다시 지정
     꺼낸거 = new Set(꺼낸거);
+    꺼낸거2 = new Set(꺼낸거2);
     // 앝은 복사해서 배열을 새로 만드는 것 Array.from, set 중복제거!
     꺼낸거 = Array.from(꺼낸거);
+    꺼낸거2 = Array.from(꺼낸거2);
     // localStorage.setItem으로 다시 지정, JSON.stringify로 해야 object가 꺠지지않음
     localStorage.setItem("watched", JSON.stringify(꺼낸거));
+    localStorage.setItem("watched2", JSON.stringify(꺼낸거2));
   }, []);
 
   let [count, setCount] = useState(0);

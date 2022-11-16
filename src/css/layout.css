@@ -56,6 +56,27 @@ p {
   border-bottom: 1px solid #ccc;
 }
 
+.App .cartBox {
+  position: fixed;
+  border-radius: 5px;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border: 1px solid #ccc;
+  width: 150px;
+  left: 83%;
+  top: 20%;
+}
+
+.App .cartBox .watchedItem {
+  margin: 15px 0;
+}
+
+.App .cartBox .watchedItem .localImg {
+  width: 120px;
+  height: 100px;
+  border-radius: 10px;
+}
+
 .App .container02 {
   display: -webkit-box;
   display: -ms-flexbox;
