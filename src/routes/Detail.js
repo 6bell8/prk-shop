@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 import data from "./../data.js";
 import { addItem, addQuantity } from "../Store";
@@ -15,6 +15,8 @@ function Detail(props) {
     // state.stock ,user 으로 프로퍼티를 가져와서 개별적으로 사용할 수 있다.
     // {} return 동시 생략가능
   );
+
+  let navigate = useNavigate();
 
   let order = () => {
     const dupValue = state.product.findIndex((x) => x.id === 찾은상품.id);
@@ -109,25 +111,29 @@ function Detail(props) {
         <div className="col-md-6">
           <img src={찾은상품.img} width="100%" />
         </div>
-        <div className="col-md-6">
+        <div className="col-md-6 detail">
           <input
             onChange={(e) => {
               setNum(e.target.value);
             }}
           />
           <h4 className="pt-5">{찾은상품.title}</h4>
-          <p>{찾은상품.content}</p>
-          <p>{찾은상품.price}원</p>
+          <p className="contents">{찾은상품.content}</p>
+          <p className="price">{찾은상품.price}원</p>
           {/* <p> {재고}</p> */}
           <button
             className="btn btn-danger"
             onClick={() => {
               {
                 dispatch(order);
+                navigate("/cart");
               }
             }}
           >
             주문하기
+          </button>
+          <button className="btn btn-danger btn02" onClick={() => navigate(-1)}>
+            뒤로가기
           </button>
         </div>
       </div>

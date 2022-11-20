@@ -90,19 +90,23 @@ p {
           margin-bottom: 5px;
         }
       }
-      .col-md-6 {
-        padding-top: 10px;
-      }
     }
   }
   .plusBtn {
-    width: 80px;
+    width: 120px;
     height: 40px;
+    color: #fff;
     margin: auto 0;
     font-size: 15px;
     border-radius: 5px;
     border: 2px solid #ccc;
-    background-color: #fff;
+    background-color: cornflowerblue;
+    &:hover {
+      font-weight: 700;
+      color: cornflowerblue;
+      background-color: white;
+      transition: all 0.5s ease-in-out;
+    }
   }
   .start {
     opacity: 0;
@@ -131,6 +135,32 @@ p {
   }
 }
 
+.detail {
+  padding-top: clamp(50px, 10vh, 100px);
+  .pt-5 {
+    font-size: 32px;
+    padding: 15px;
+  }
+  p {
+    font-weight: 300;
+    color: rgb(86, 86, 86);
+  }
+  .price {
+    font-weight: 500;
+  }
+  .btn-danger {
+    margin: 20px 8px 8px 8px;
+  }
+}
+
+@media all and (max-width: 960px) {
+  .App {
+    .detail {
+      padding-top: 20px;
+    }
+  }
+}
+
 @media all and (max-width: 767px) {
   .App {
     .container02 {
@@ -150,6 +180,11 @@ p {
             font-weight: 400;
           }
         }
+      }
+    }
+    .detail {
+      .pt-5 {
+        font-size: 24px;
       }
     }
   }

@@ -11,6 +11,7 @@ import Detail from "./routes/Detail.js";
 import Loading from "./routes/Loading";
 import axios from "axios";
 import Cart from "./routes/Cart";
+import { useQuery } from "react-query";
 
 // export let Context1 = createContext(); // state보관함
 
@@ -19,6 +20,21 @@ function App() {
   localStorage.setItem("data", JSON.stringify(obj));
   let 꺼낸거 = JSON.parse(localStorage.getItem("watched"));
   let 꺼낸거2 = JSON.parse(localStorage.getItem("watched2"));
+
+  let result = useQuery("작명", () => {
+    return axios
+      .get(
+        "https://gist.githubusercontent.com/6bell8/c2b4dcb1c92bb4ad2eda5726cdc808b2/raw/cc663f107eba9588f6ec45e0e3ce660ab0d9776f/user.json"
+      )
+      .then((a) => {
+        return a.data;
+      });
+    // { staleTime: 2000 } // refetch를 설정 할 수 있는 기능
+  });
+
+  result.data;
+  result.isLoading;
+  result.error;
 
   // useEffect 내에서 if문 사용가능
 
@@ -100,6 +116,12 @@ function App() {
             >
               Event
             </Nav.Link>
+          </Nav>
+
+          <Nav className="msAuto">
+            반갑습니다. {result.isLoading && "로딩중"}
+            {result.error && "에러"}
+            {result.data && result.data.name}
           </Nav>
         </Container>
       </Navbar>
@@ -220,7 +242,12 @@ function Event() {
 
 function Card(props) {
   return (
-    <div className="col-md-4">
+    <div
+      className="col-md-4"
+      onClick={() => {
+        navigate("/detail/:id");
+      }}
+    >
       <img src={process.env.PUBLIC_URL + props.shoes.img} width="80%" />
       <h4>{props.shoes.title}</h4>
       <p>{props.shoes.price}</p>
