@@ -147,10 +147,12 @@ function App() {
                     ? 꺼낸거.map((a, i) => {
                         return (
                           <div className="watchedItem" key={i}>
-                            <img
-                              src={`${꺼낸거[i]}`}
-                              className="localImg"
-                            ></img>
+                            <Nav.Link href={"/detail/" + i}>
+                              <img
+                                src={`${꺼낸거[i]}`}
+                                className="localImg"
+                              ></img>
+                            </Nav.Link>
                             <p className="name">{꺼낸거2[i]}</p>
                           </div>
                         );
@@ -251,13 +253,10 @@ function Event() {
 
 function Card(props) {
   return (
-    <div
-      className="col-md-4"
-      onClick={() => {
-        navigate("/detail/:id");
-      }}
-    >
-      <img src={process.env.PUBLIC_URL + props.shoes.img} width="80%" />
+    <div className="col-md-4">
+      <Nav.Link href={"/detail/" + props.shoes.id}>
+        <img src={process.env.PUBLIC_URL + props.shoes.img} width="80%" />
+      </Nav.Link>
       <h4>{props.shoes.title}</h4>
       <p>{props.shoes.price}</p>
     </div>

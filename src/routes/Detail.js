@@ -95,7 +95,7 @@ function Detail(props) {
   return (
     <div className={`container start ${Fade02}`}>
       {alert == true ? (
-        <div className="alert alert-warning">2초 이내에 구입 시 할인</div>
+        <div className="alert alert-warning">재고가 얼마 남지않았어요!</div>
       ) : null}
 
       {count}
