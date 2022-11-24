@@ -4,7 +4,20 @@ import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { changeName, changeAge } from "./../store/userSlice";
 import { addCount, removeItem } from "./../Store";
+import { memo, useMemo, useState } from "react";
 
+//memo의 기능은 꼭 필요할 때만(props)를 실행 시킬 떄만 재렌더링 해주세요 의 기능
+// let Child = memo(function () {
+//   console.log("재렌더링됨");
+//   return <div>자식</div>;
+// });
+
+function 함수() {
+  return;
+}
+
+// cart 재런더링 시에 자식 컴포넌트들도 재렌더링이 됨
+// useMemo같은 함수로 작동시키면 렌더링 시 1회만 실행해줌
 function Cart() {
   let state = useSelector(
     (state) => state
@@ -17,9 +30,19 @@ function Cart() {
   //Store에서 변경 할 함수를 import해와서 변수를 생성하고 useDispatch 함수는 store로 요청을 보내주는 함수라고 생각하면 된다.
 
   let dispatch = useDispatch();
+  // let [count, setCount] = useState(0);
 
   return (
     <div>
+      {/* <Child count={count}></Child>
+      <button
+        onClick={() => {
+          setCount(count + 1);
+        }}
+      >
+        버튼
+      </button> */}
+
       <h6>
         {state.user.name} {state.user.age}의 장바구니
       </h6>
