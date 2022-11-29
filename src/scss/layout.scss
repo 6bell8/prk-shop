@@ -153,6 +153,15 @@ p {
   }
 }
 
+// .title {
+//   margin: 40px 20px 40px clamp(25px, 15vw, 110px);
+//   text-align: left;
+// }
+
+// 반응형 따로
+.board {
+}
+
 @media all and (max-width: 960px) {
   .App {
     .detail {

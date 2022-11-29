@@ -9,11 +9,14 @@ import data from "./data.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 
 import Loading from "./routes/Loading";
+
 import axios from "axios";
 import { useQuery } from "react-query";
 
 const Detail = lazy(() => import("./routes/Detail"));
 const Cart = lazy(() => import("./routes/Cart"));
+const Contact = lazy(() => import("./routes/Contact"));
+const Board = lazy(() => import("./routes/Board"));
 // import Detail from "./routes/Detail.js";
 // import Cart from "./routes/Cart";
 
@@ -105,7 +108,6 @@ function App() {
             >
               Detail
             </Nav.Link>
-
             <Nav.Link
               onClick={() => {
                 navigate("/cart");
@@ -119,6 +121,13 @@ function App() {
               }}
             >
               Event
+            </Nav.Link>{" "}
+            <Nav.Link
+              onClick={() => {
+                navigate("/contact");
+              }}
+            >
+              Contact Us
             </Nav.Link>
           </Nav>
 
@@ -212,6 +221,7 @@ function App() {
           {/* Context1 이라는 보관함으로 state를 보관할 대상을 element안에서 묶어준다. */}
           <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/contact" element={<Contact />} />
           {/* nested 문법 핵심은 Route 괄호를 열어서 구성, path 앞부분은 제외 */}
           <Route path="/about" element={<About />}>
             <Route path="member" element={<div>멤버이름</div>} />
