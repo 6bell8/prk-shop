@@ -1,46 +1,102 @@
 /* eslint-disable */
 
 import { Table } from "react-bootstrap";
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useRef, useState, useMemo } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import BoardList from "./BoardList";
 import axios from "axios";
+// let navigate = useNavigate();
 
 function Contact() {
+  const dataId = useRef(0);
+  // useRef는 화면이 렌더링 되어서 값이 초기화 되는걸 막고 싶을때 또는 Dom제어할때....
+  // App.js에서 데이터 관리.... 자식에게 prop로 데이터 전달해서 거기서 함수 실행을 하고 부모에서
+  // 데이터 바뀌는 걸 테스트 해봤음....
+  let count = 0;
+  const deleteBoard = function (id) {
+    const filteredBoardData = boardData.filter((item, idx) => {
+      return item.id !== id;
+    });
+    setBoardData(filteredBoardData);
+  };
+
+  const modifyBoard = function (id, localContents) {
+    //console.log(localContents);
+    const modifiedBoardData = boardData.map((item, idx) => {
+      return item.id === id ? { ...item, contents: localContents } : item;
+    });
+    console.log(modifiedBoardData);
+    setBoardData(modifiedBoardData);
+  };
+
+  const insertBoard = function (writer, contents, emotion) {
+    console.log("writer===", writer);
+    console.log("contents===", contents);
+    console.log("emotion===", emotion);
+    const inserBoardData = {
+      writer: writer,
+      contents: contents,
+      emotion: emotion,
+      date: new Date().getTime(),
+      id: dataId.current,
+    };
+    dataId.current += 1;
+    count += 1;
+    console.log(dataId.current);
+    setBoardData([inserBoardData, ...boardData]);
+  };
+  const [boardData, setBoardData] = useState([]);
+
+  // 렌더링을 최소화 하기 위해서 쓴다.
+  const boardAnalysis = useMemo(() => {
+    console.log("일기분석을 시작합니다.");
+    const total = boardData.length;
+    const good = boardData.filter((item, idx) => {
+      return item.emotion >= 3;
+    }).length;
+    const bad = total - good;
+    const percent = Math.floor((good / total) * 100 * 100) / 100;
+    return {
+      good: good,
+      bad: bad,
+      percent: percent,
+      total: total,
+    };
+  }, [boardData]);
+
   return (
     <div className="board">
-      <section className="title">
+      {/* <div className="boardTitle">
         <h4>
           <strong>문의 하기</strong>
         </h4>
         <p>문의 사항을 작성해주세요.</p>
-      </section>
-
-      <table className="boardTable">
-        <colgroup>
-          <col width="20%" />
-          <col width="40%" />
-          <col width="15%" />
-          <col width="15%" />
-          <col width="10%" />
-        </colgroup>
-        <thead>
-          <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>글쓴이</th>
-            <th>작성일</th>
-            <th>조회</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>글제목</td>
-            <td>박진성</td>
-            <td>2022.11.28</td>
-            <td>조회</td>
-          </tr>
-        </tbody>
-      </table>
+      </div> */}
+      <div className="boardListWrap"></div>
+      <BoardList
+        boardList={boardData}
+        deleteBoard={deleteBoard}
+        modifyBoard={modifyBoard}
+      ></BoardList>
+      <div className="boardPage"></div>
+      <div className="btWrap">
+        <Link
+          button
+          className="on"
+          onClick={() => {
+            navigate("/contact");
+          }}
+        >
+          목록
+        </Link>
+        <Link
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          수정
+        </Link>
+      </div>
     </div>
   );
 }

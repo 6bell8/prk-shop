@@ -16,7 +16,6 @@ import { useQuery } from "react-query";
 const Detail = lazy(() => import("./routes/Detail"));
 const Cart = lazy(() => import("./routes/Cart"));
 const Contact = lazy(() => import("./routes/Contact"));
-const Board = lazy(() => import("./routes/Board"));
 // import Detail from "./routes/Detail.js";
 // import Cart from "./routes/Cart";
 
