@@ -213,7 +213,7 @@ p {
   color: #fff;
 }
 
-.board .btWrap a {
+.board .btWrap button {
   margin: 0 0 0 10px;
   display: inline-block;
   min-width: 10px;
@@ -223,7 +223,7 @@ p {
   padding: 0px 10px;
 }
 
-.board .btWrap a:first-child {
+.board .btWrap button:first-child {
   margin: 0;
 }
 

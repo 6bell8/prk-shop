@@ -1,17 +1,14 @@
 /* eslint-disable */
 
-import { Table } from "react-bootstrap";
 import { memo, useEffect, useRef, useState, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import BoardList from "./BoardList";
+import Write from "./Write";
 import axios from "axios";
-// let navigate = useNavigate();
 
 function Contact() {
+  let navigate = useNavigate();
   const dataId = useRef(0);
-  // useRef는 화면이 렌더링 되어서 값이 초기화 되는걸 막고 싶을때 또는 Dom제어할때....
-  // App.js에서 데이터 관리.... 자식에게 prop로 데이터 전달해서 거기서 함수 실행을 하고 부모에서
-  // 데이터 바뀌는 걸 테스트 해봤음....
   let count = 0;
   const deleteBoard = function (id) {
     const filteredBoardData = boardData.filter((item, idx) => {
@@ -72,6 +69,7 @@ function Contact() {
         </h4>
         <p>문의 사항을 작성해주세요.</p>
       </div> */}
+      <Write insertBoard={insertBoard} />
       <div className="boardListWrap"></div>
       <BoardList
         boardList={boardData}
@@ -80,22 +78,10 @@ function Contact() {
       ></BoardList>
       <div className="boardPage"></div>
       <div className="btWrap">
-        <Link
-          button
-          className="on"
-          onClick={() => {
-            navigate("/contact");
-          }}
-        >
-          목록
-        </Link>
-        <Link
-          onClick={() => {
-            navigate("/");
-          }}
-        >
-          수정
-        </Link>
+        <button className="on" onClick={() => navigate("/write")}>
+          글쓰기
+        </button>
+        <button onClick={() => navigate(-1)}> 뒤로가기</button>
       </div>
     </div>
   );

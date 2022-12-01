@@ -1,9 +1,11 @@
-import { useState, useRef } from "react";
-export default function DiaryEditor({ insertDiary }) {
-  // const [writer, setWriter] = useState("");
-  // const [contents, setContents] = useState("");
-  // const [emotion, setEmotion] = useState(1);
-  // obj = {name:"장성호",age:22,weight:90}
+/* eslint-disable */
+
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+function Write({ insertBoard }) {
+  let navigate = useNavigate();
+
   const radioList = [
     {
       emotion: 1,
@@ -28,63 +30,40 @@ export default function DiaryEditor({ insertDiary }) {
   ];
   const writerRef = useRef();
   const contentsRef = useRef();
-  const [diaryItem, setDiaryItem] = useState({
+  const [boardItem, setBoardItem] = useState({
     writer: "",
     contents: "",
     emotion: 1,
   });
-  const insertDiaryItem = function () {
-    // console.log(diaryItem.writer);
-    // console.log(diaryItem.contents);
-    // console.log(diaryItem.emotion);
-    if (diaryItem.writer.length < 3) {
+  const insertBoardItem = function () {
+    if (boardItem.writer.length < 3) {
       alert("글쓴이는 최소 3글자 이상이어야 합니다.");
       writerRef.current.focus();
       return false;
-    } else if (diaryItem.contents.length < 10) {
+    } else if (boardItem.contents.length < 10) {
       alert("내용은 최소 10글자 이상이어야 합니다.");
       contentsRef.current.focus();
       return false;
     }
     // 자식이 부모에게 데이터 전달하는 방법....
-    insertDiary(diaryItem.writer, diaryItem.contents, diaryItem.emotion);
+
+    insertBoard(boardItem.writer, boardItem.contents, boardItem.emotion);
     alert("일기가 저장되었습니다.");
-    setDiaryItem({
+    setBoardItem({
       writer: "",
       contents: "",
       emotion: 1,
     });
   };
-  /*
-  const changeWriter = function (e) {
-    setWriter(e.target.value);
-    console.log(e.target.value);
-  };
-  const changeContents = function (e) {
-    setContents(e.target.value);
-    console.log(e.target.value);
-  };
-  const changeEmotion = function (e) {
-    setEmotion(e.target.value);
-    console.log(e.target.value);
-  };
-  */
-  const changeDiaryItem = function (e) {
+
+  const changeBoardItem = function (e) {
     console.log(e.target.value);
     // 흩뿌리기....
-    setDiaryItem({
-      ...diaryItem,
+    setBoardItem({
+      ...boardItem,
       [e.target.name]: e.target.value,
     });
   };
-  // const testObj = { name: "장동건", age: 30, weight: 90 };
-  // const spreadObj = { ...testObj, name: "정형돈" };
-  // console.log(spreadObj.name);
-
-  // const arr01 = ["사자", "호랑이", "치타"];
-  // const arr02 = [...arr01, " 표범"];
-  // console.log(arr01);
-  // console.log(arr02);
 
   return (
     <div className="container">
@@ -92,10 +71,10 @@ export default function DiaryEditor({ insertDiary }) {
         <input
           type="text"
           name="writer"
-          value={diaryItem.writer}
+          value={boardItem.writer}
           id=""
           placeholder="이름을 입력해 주세요."
-          onChange={changeDiaryItem}
+          onChange={changeBoardItem}
           ref={writerRef}
         />
       </div>
@@ -105,19 +84,19 @@ export default function DiaryEditor({ insertDiary }) {
           id=""
           cols="30"
           rows="10"
-          value={diaryItem.contents}
+          value={boardItem.contents}
           placeholder="내용을 입력해 주세요."
-          onChange={changeDiaryItem}
+          onChange={changeBoardItem}
           ref={contentsRef}
         ></textarea>
       </div>
       <div className="section">
-        <span>오늘 하루 어땠나요?</span>
+        <span>서비스를 평가해주세요.</span>
         <select
           name="emotion"
           id=""
-          value={diaryItem.emotion}
-          onChange={changeDiaryItem}
+          value={boardItem.emotion}
+          onChange={changeBoardItem}
         >
           <option value="1">1</option>
           <option value="2">2</option>
@@ -127,10 +106,11 @@ export default function DiaryEditor({ insertDiary }) {
         </select>
       </div>
       <div className="btns section">
-        <button className="btn btnSave" onClick={insertDiaryItem}>
+        <button className="btn btnSave" onClick={insertBoardItem}>
           SAVE
         </button>
       </div>
     </div>
   );
 }
+export default Write;

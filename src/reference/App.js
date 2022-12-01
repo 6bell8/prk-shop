@@ -45,17 +45,7 @@ function App() {
     setDiaryData([inserDiaryData, ...diaryData]);
   };
   const [diaryData, setDiaryData] = useState([]);
-  /*
-  const diaryData = [
-    { id: 1, writer: "장성호", contents: "날씨도 화창한데 집에서 듣는 나쁜 학생들....ㅋㅋㅋ", emotion: 1, date: 1662512885838 },
-    { id: 2, writer: "장동건", contents: "날씨도 화창한데 집에서 듣는 나쁜 학생들....ㅋㅋㅋ", emotion: 2, date: 166551285838 },
-    { id: 3, writer: "현빈", contents: "날씨도 화창한데 집에서 듣는 나쁜 학생들....ㅋㅋㅋ", emotion: 3, date: 1662812815838 },
-    { id: 4, writer: "지석진", contents: "날씨도 화창한데 집에서 듣는 나쁜 학생들....ㅋㅋㅋ", emotion: 2, date: 1662712815838 },
-    { id: 5, writer: "지석진", contents: "날씨도 화창한데 집에서 듣는 나쁜 학생들....ㅋㅋㅋ", emotion: 2, date: 1662912815838 },
-    { id: 4, writer: "지석진", contents: "날씨도 화창한데 집에서 듣는 나쁜 학생들....ㅋㅋㅋ", emotion: 2, date: 1662712815838 },
-    { id: 5, writer: "지석진", contents: "날씨도 화창한데 집에서 듣는 나쁜 학생들....ㅋㅋㅋ", emotion: 2, date: 1662912815838 },
-  ];
-*/
+
   // 렌더링을 최소화 하기 위해서 쓴다.
   const diaryAnalysis = useMemo(() => {
     console.log("일기분석을 시작합니다.");

@@ -9,6 +9,7 @@ import data from "./data.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 
 import Loading from "./routes/Loading";
+import Write from "./routes/Write";
 
 import axios from "axios";
 import { useQuery } from "react-query";
@@ -220,7 +221,7 @@ function App() {
           {/* Context1 이라는 보관함으로 state를 보관할 대상을 element안에서 묶어준다. */}
           <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/contact" element={<Contact />} />
+
           {/* nested 문법 핵심은 Route 괄호를 열어서 구성, path 앞부분은 제외 */}
           <Route path="/about" element={<About />}>
             <Route path="member" element={<div>멤버이름</div>} />
@@ -234,6 +235,8 @@ function App() {
             <Route path="two" element={<div>생일기념 쿠폰받기</div>}></Route>
           </Route>
           <Route path="*" element={<div>없는 페이지입니다.</div>} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/write" element={<Write />} />
         </Routes>
       </Suspense>
     </div>

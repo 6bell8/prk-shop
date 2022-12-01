@@ -12,8 +12,6 @@ export default function BoardList({ boardList, deleteBoard, modifyBoard }) {
         </div>
         <ul className="list">
           {boardList.map((item, idx) => {
-            //console.log({ ...item });
-            //return <BoardItem key={idx} BoardInfo={item} />;
             return (
               <BoardItem
                 key={idx}

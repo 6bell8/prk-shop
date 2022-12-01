@@ -126,6 +126,7 @@ function Detail(props) {
             onClick={() => {
               {
                 dispatch(order);
+                confirm("주문 하시겠습니까?");
                 navigate("/cart");
               }
             }}

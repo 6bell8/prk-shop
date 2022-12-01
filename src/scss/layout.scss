@@ -186,7 +186,7 @@ p {
       background: cornflowerblue;
       color: #fff;
     }
-    a {
+    button {
       margin: 0 0 0 10px;
       display: inline-block;
       min-width: 10px;
@@ -195,7 +195,7 @@ p {
       font-size: 1.4rem;
       padding: 0px 10px;
     }
-    a:first-child {
+    button:first-child {
       margin: 0;
     }
   }
