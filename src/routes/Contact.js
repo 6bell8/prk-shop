@@ -1,88 +1,105 @@
 /* eslint-disable */
 
-import { memo, useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import BoardList from "./BoardList";
-import Write from "./Write";
+import Tr from "./Tr";
+import Post from "./Post";
+import Modal from "./Modal";
 import axios from "axios";
 
 function Contact() {
-  let navigate = useNavigate();
-  const dataId = useRef(0);
-  let count = 0;
-  const deleteBoard = function (id) {
-    const filteredBoardData = boardData.filter((item, idx) => {
-      return item.id !== id;
-    });
-    setBoardData(filteredBoardData);
+  const [info, setInfo] = useState([]);
+  const [selected, setSelected] = useState([]);
+  const [modalOn, setModalOn] = useState([false]);
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://gist.githubusercontent.com/6bell8/ef6a17fafcf4daf95845740f352faf84/raw/e89a7afaa9ba5ea88f3a4605049345affe15f458/contactData.json"
+      )
+      .then((res) => setInfo(res.data))
+      .catch((err) => console.log(err));
+  });
+
+  const handleSave = (data) => {
+    if (data.id) {
+      setInfo(
+        info.map((row) =>
+          data.id === row.id
+            ? {
+                id: data.id,
+                name: data.name,
+                email: data.email,
+                phone: data.phone,
+                website: data.website,
+              }
+            : row
+        )
+      );
+    } else {
+      setInfo((info) =>
+        info.concat({
+          id: nextId.current,
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          website: data.website,
+        })
+      );
+      nextId.current += 1;
+    }
   };
 
-  const modifyBoard = function (id, localContents) {
-    //console.log(localContents);
-    const modifiedBoardData = boardData.map((item, idx) => {
-      return item.id === id ? { ...item, contents: localContents } : item;
-    });
-    console.log(modifiedBoardData);
-    setBoardData(modifiedBoardData);
+  const handleRemove = (id) => {
+    setInfo((info) => info.filter((item) => item.id !== id));
   };
 
-  const insertBoard = function (writer, contents, emotion) {
-    console.log("writer===", writer);
-    console.log("contents===", contents);
-    console.log("emotion===", emotion);
-    const inserBoardData = {
-      writer: writer,
-      contents: contents,
-      emotion: emotion,
-      date: new Date().getTime(),
-      id: dataId.current,
+  const handleEdit = (item) => {
+    setModalOn(true);
+    const selectedData = {
+      id: item.id,
+      name: item.name,
+      email: item.email,
+      phone: item.phone,
+      website: item.website,
     };
-    dataId.current += 1;
-    count += 1;
-    console.log(dataId.current);
-    setBoardData([inserBoardData, ...boardData]);
+    console.log(selectedData);
+    setSelected(selectedData);
   };
-  const [boardData, setBoardData] = useState([]);
 
-  // 렌더링을 최소화 하기 위해서 쓴다.
-  const boardAnalysis = useMemo(() => {
-    console.log("일기분석을 시작합니다.");
-    const total = boardData.length;
-    const good = boardData.filter((item, idx) => {
-      return item.emotion >= 3;
-    }).length;
-    const bad = total - good;
-    const percent = Math.floor((good / total) * 100 * 100) / 100;
-    return {
-      good: good,
-      bad: bad,
-      percent: percent,
-      total: total,
-    };
-  }, [boardData]);
+  const handleCancel = () => {
+    setModalOn(false);
+  };
+
+  const handleEditSubmit = (item) => {
+    console.log(item);
+    handleSave(item);
+    setModalOn(false);
+  };
 
   return (
-    <div className="board">
-      {/* <div className="boardTitle">
-        <h4>
-          <strong>문의 하기</strong>
-        </h4>
-        <p>문의 사항을 작성해주세요.</p>
-      </div> */}
-      <Write insertBoard={insertBoard} />
-      <div className="boardListWrap"></div>
-      <BoardList
-        boardList={boardData}
-        deleteBoard={deleteBoard}
-        modifyBoard={modifyBoard}
-      ></BoardList>
-      <div className="boardPage"></div>
-      <div className="btWrap">
-        <button className="on" onClick={() => navigate("/write")}>
-          글쓰기
-        </button>
-        <button onClick={() => navigate(-1)}> 뒤로가기</button>
-      </div>
+    <div className="container max-w-screen-lg mx-auto">
+      <div className="text-xl font-bold mt-5 mb-3 text-center">문의 사항</div>
+      <table className="min-w-full table-auto text-gray-800">
+        <thead className="justify-between">
+          <tr className="bg-gray-800">
+            <th className="text-gray-300 px-4 py-3">ID</th>
+            <th className="text-gray-300 px-4 py-3">Name</th>
+            <th className="text-gray-300 px-4 py-3">Phone No</th>
+            <th className="text-gray-300 px-4 py-3">Edit</th>
+            <th className="text-gray-300 px-4 py-3">Delete</th>
+          </tr>
+        </thead>
+        <Tr info={info} handleRemove={handleRemove} handleEdit={handleEdit} />
+      </table>
+      {/* <Post onSaveData={handleSave} />
+      {modalOn && (
+        <Modal
+          selectedData={selected}
+          handleCancel={handleCancel}
+          handleEditSubmit={handleEditSubmit}
+        />
+      )} */}
     </div>
   );
 }

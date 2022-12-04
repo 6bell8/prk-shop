@@ -9,7 +9,6 @@ import data from "./data.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 
 import Loading from "./routes/Loading";
-import Write from "./routes/Write";
 
 import axios from "axios";
 import { useQuery } from "react-query";
@@ -236,7 +235,6 @@ function App() {
           </Route>
           <Route path="*" element={<div>없는 페이지입니다.</div>} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/write" element={<Write />} />
         </Routes>
       </Suspense>
     </div>
@@ -255,9 +253,18 @@ function About() {
 }
 
 function Event() {
+  let navigate = useNavigate();
+
   return (
     <div>
       <h4>오늘의 이벤트</h4>
+      <button
+        onClick={() => {
+          navigate("one");
+        }}
+      >
+        첫번째
+      </button>
       <Outlet></Outlet>
     </div>
   );
