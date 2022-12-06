@@ -5,6 +5,7 @@ import React from "react";
 const Td = ({ item, handleRemove, handleEdit }) => {
   const onRemove = () => {
     handleRemove(item.id);
+    alert("삭제 하시겠습니까?");
   };
 
   const onEdit = () => {
@@ -15,19 +16,15 @@ const Td = ({ item, handleRemove, handleEdit }) => {
     <>
       <tr className="bg-white border-2 border-gray-200">
         <td className="px-4 py-3">{item.id}</td>
-        <td className="px-4 py-3">{item.name}</td>
+        <td className="px-4 py-3">{item.username}</td>
+        <td className="px-4 py-3">{item.qa}</td>
+        {/* <td className="px-4 py-3">{item.email}</td> */}
         <td className="px-4 py-3">{item.phone}</td>
-        <td
-          onClick={onEdit}
-          className="text-center text-purple-400 cursor-pointer show-modal"
-        >
-          <i class="far fa-edit"></i>
+        <td className="text-center text-purple-400 cursor-pointer show-modal">
+          <button onClick={onEdit}>asd</button>
         </td>
-        <td
-          onClick={onRemove}
-          className="text-center text-purple-400 cursor-pointer "
-        >
-          <i class="far fa-trash-alt"></i>
+        <td className="text-center text-purple-400 cursor-pointer ">
+          <button onClick={onRemove}>asd</button>
         </td>
       </tr>
     </>

@@ -7,19 +7,19 @@ import Post from "./Post";
 import Modal from "./Modal";
 import axios from "axios";
 
-function Contact() {
+const Contact = () => {
   const [info, setInfo] = useState([]);
-  const [selected, setSelected] = useState([]);
-  const [modalOn, setModalOn] = useState([false]);
-
+  const [selected, setSelected] = useState("");
+  const [modalOn, setModalOn] = useState(false);
+  const nextId = useRef(11);
   useEffect(() => {
     axios
       .get(
-        "https://gist.githubusercontent.com/6bell8/ef6a17fafcf4daf95845740f352faf84/raw/e89a7afaa9ba5ea88f3a4605049345affe15f458/contactData.json"
+        "https://gist.githubusercontent.com/6bell8/ef6a17fafcf4daf95845740f352faf84/raw/80eafbff7365131bdac7e116efcc7ed4dc5180a7/contactData.json"
       )
       .then((res) => setInfo(res.data))
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   const handleSave = (data) => {
     if (data.id) {
@@ -28,7 +28,8 @@ function Contact() {
           data.id === row.id
             ? {
                 id: data.id,
-                name: data.name,
+                username: data.username,
+                qa: data.qa,
                 email: data.email,
                 phone: data.phone,
                 website: data.website,
@@ -40,7 +41,8 @@ function Contact() {
       setInfo((info) =>
         info.concat({
           id: nextId.current,
-          name: data.name,
+          username: data.username,
+          qa: data.qa,
           email: data.email,
           phone: data.phone,
           website: data.website,
@@ -58,7 +60,8 @@ function Contact() {
     setModalOn(true);
     const selectedData = {
       id: item.id,
-      name: item.name,
+      username: item.username,
+      qa: item.qa,
       email: item.email,
       phone: item.phone,
       website: item.website,
@@ -83,17 +86,18 @@ function Contact() {
       <table className="min-w-full table-auto text-gray-800">
         <thead className="justify-between">
           <tr className="bg-gray-800">
-            <th className="text-gray-300 px-4 py-3">ID</th>
-            <th className="text-gray-300 px-4 py-3">Name</th>
-            <th className="text-gray-300 px-4 py-3">Phone No</th>
-            <th className="text-gray-300 px-4 py-3">Edit</th>
-            <th className="text-gray-300 px-4 py-3">Delete</th>
+            <th className="text-gray-300 px-4 py-3">번호</th>
+            <th className="text-gray-300 px-4 py-3">이름</th>
+            <th className="text-gray-300 px-4 py-3">문의사항</th>
+            <th className="text-gray-300 px-4 py-3">연락처</th>
+            <th className="text-gray-300 px-4 py-3">수정</th>
+            <th className="text-gray-300 px-4 py-3">삭제</th>
           </tr>
         </thead>
         <Tr info={info} handleRemove={handleRemove} handleEdit={handleEdit} />
       </table>
-      {/* <Post onSaveData={handleSave} />
-      {modalOn && (
+      <Post onSaveData={handleSave} />
+      {/* {modalOn && (
         <Modal
           selectedData={selected}
           handleCancel={handleCancel}
@@ -102,6 +106,6 @@ function Contact() {
       )} */}
     </div>
   );
-}
+};
 
 export default Contact;

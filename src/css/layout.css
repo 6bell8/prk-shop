@@ -3,7 +3,8 @@ html {
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Noto Sans KR";
+  max-width: 1920px;
 }
 
 a {
@@ -20,6 +21,7 @@ p {
 
 .App .navbar {
   background-color: #fff;
+  padding: 0 70px;
 }
 
 .App .navbar .container {
@@ -29,6 +31,7 @@ p {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .App .navbar .container .navbar-brand {
@@ -49,6 +52,10 @@ p {
 
 .App .navbar .container .linkbar-brand:hover {
   color: #111;
+}
+
+.App .nav-tabs {
+  margin: 20px 0;
 }
 
 .App .main-bg {
@@ -72,7 +79,7 @@ p {
 }
 
 .App .cartBox .watchedItem {
-  margin: 15px 0;
+  margin: 15px;
 }
 
 .App .cartBox .watchedItem .localImg {
@@ -102,6 +109,7 @@ p {
 .App .container02 .row .col-md-4 img {
   width: clamp(180px, 17vw, 400px);
   height: clamp(120px, 23vh, 200px);
+  margin: 0 auto;
   border-radius: 20px;
 }
 
@@ -136,6 +144,7 @@ p {
 
 .App .start {
   opacity: 0;
+  width: 1280px;
 }
 
 .App .end {
@@ -158,6 +167,14 @@ p {
   display: none;
 }
 
+.table {
+  width: 1280px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 0 auto;
+}
+
 .table thead {
   border-bottom: solid 1px #ccc;
 }
@@ -166,9 +183,25 @@ p {
   padding-top: clamp(50px, 10vh, 100px);
 }
 
+.detail .material-icons {
+  font-size: 40px;
+}
+
+.detail .material-icons:hover {
+  color: #d22340;
+  font-size: 40px;
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+
+.detail .heart {
+  color: #d22340;
+}
+
 .detail .pt-5 {
   font-size: 32px;
   padding: 15px;
+  padding-top: 1.5rem !important;
 }
 
 .detail p {

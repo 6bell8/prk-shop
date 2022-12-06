@@ -35,6 +35,9 @@ function Detail(props) {
       let a = setTimeout(() => {
         setAlert(false);
       }, 5000);
+      // let b = setHeart(() => {
+      //   setHeart(false);
+      // });
       return () => {
         //useEffect 실행이 되기 전에 return code가 실행이 먼저된다.
         //브라우저 내에 타이머가 여러 개가 있을 때 기존에 있는 타이머를 제거하고 사용하면 보다 효율적이다. // 소위 clean up function
@@ -76,6 +79,11 @@ function Detail(props) {
 
   let [count, setCount] = useState(0);
   let [alert, setAlert] = useState(true);
+  let [isCheck, setIsCheck] = useState(true);
+
+  const changeCheck = () => {
+    setIsCheck((check: boolean) => !check);
+  };
 
   let { id } = useParams();
   let 찾은상품 = props.shoes.find((x) => x.id == id);
@@ -98,25 +106,25 @@ function Detail(props) {
         <div className="alert alert-warning">재고가 얼마 남지않았어요!</div>
       ) : null}
 
-      {count}
-      <button
-        onClick={() => {
-          setCount(++count);
-        }}
-      >
-        버튼
-      </button>
-
       <div className="row">
         <div className="col-md-6">
           <img src={찾은상품.img} width="100%" />
         </div>
         <div className="col-md-6 detail">
-          <input
-            onChange={(e) => {
-              setNum(e.target.value);
-            }}
-          />
+          {/* {count} */}
+          <button>
+            {/* 버튼 */}
+            {isCheck ? (
+              <span onClick={changeCheck} className="material-icons">
+                favorite_border
+              </span>
+            ) : (
+              <span onClick={changeCheck} className="material-icons heart">
+                favorite_border
+              </span>
+            )}
+          </button>
+
           <h4 className="pt-5">{찾은상품.title}</h4>
           <p className="contents">{찾은상품.content}</p>
           <p className="price">{찾은상품.price}원</p>
