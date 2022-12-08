@@ -153,6 +153,18 @@ p {
   transition: all 0.5s;
 }
 
+.App .min-w-full .bg-white .qaDetail {
+  display: -webkit-box;
+  height: 3.4em;
+  overflow: hidden;
+  line-height: 1.7;
+  -webkit-line-clamp: 2;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+  height: 4.5rem;
+}
+
 .start {
   opacity: 0;
 }

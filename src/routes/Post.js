@@ -68,7 +68,7 @@ const Post = ({ onSaveData }) => {
                     border-2 border-gray-100
                     focus:text-gray-500 focus:outline-none focus:border-gray-200"
                 required
-                placeholder="이메일 주소를 입력해주세요."
+                placeholder="문의사항을 입력해주세요."
                 type="qa"
                 name="qa"
                 value={form.qa}

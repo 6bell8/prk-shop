@@ -1,3 +1,6 @@
+@import "_vars";
+@import "_mixin";
+
 html {
   font-size: 16px;
 }
@@ -126,6 +129,14 @@ p {
   .end {
     opacity: 1;
     transition: all 0.5s;
+  }
+  .min-w-full {
+    .bg-white {
+      .qaDetail {
+        @include multiEllipsis(2, 1.7);
+        height: 4.5rem;
+      }
+    }
   }
 }
 
