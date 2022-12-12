@@ -78,7 +78,7 @@ function Detail(props) {
 
       <div className="row">
         <div className="col-md-6">
-          <img src={찾은상품.img} width="100%" />
+          <img src={찾은상품.img} width="100%" alt="not found image" />
         </div>
         <div className="col-md-6 detail">
           <button>
