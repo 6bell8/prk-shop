@@ -153,6 +153,18 @@ p {
   transition: all 0.5s;
 }
 
+.App .min-w-full .bg-white .qaDetail {
+  display: -webkit-box;
+  height: 2.6em;
+  overflow: hidden;
+  line-height: 2.6;
+  -webkit-line-clamp: 1;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+  height: 4.5rem;
+}
+
 .start {
   opacity: 0;
 }
@@ -258,6 +270,24 @@ p {
 
 .board .btWrap button:first-child {
   margin: 0;
+}
+
+.post form {
+  margin-top: 50px;
+}
+
+.post form .question {
+  height: 150px;
+}
+
+.post form .text-gray-800 {
+  padding-left: 5px;
+  font-size: 15px;
+}
+
+.post form .w-full {
+  font-size: 15px;
+  margin-bottom: 10px;
 }
 
 @media all and (max-width: 960px) {

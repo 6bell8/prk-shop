@@ -1,3 +1,6 @@
+@import "_vars";
+@import "_mixin";
+
 html {
   font-size: 16px;
 }
@@ -127,6 +130,14 @@ p {
     opacity: 1;
     transition: all 0.5s;
   }
+  .min-w-full {
+    .bg-white {
+      .qaDetail {
+        @include multiEllipsis(1, 2.6);
+        height: 4.5rem;
+      }
+    }
+  }
 }
 
 .start {
@@ -221,6 +232,24 @@ p {
     }
     button:first-child {
       margin: 0;
+    }
+  }
+}
+
+.post {
+  form {
+    margin-top: 50px;
+
+    .question {
+      height: 150px;
+    }
+    .text-gray-800 {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .w-full {
+      font-size: 15px;
+      margin-bottom: 10px;
     }
   }
 }

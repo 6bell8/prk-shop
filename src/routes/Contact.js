@@ -15,11 +15,13 @@ const Contact = () => {
   useEffect(() => {
     axios
       .get(
-        "https://gist.githubusercontent.com/6bell8/ef6a17fafcf4daf95845740f352faf84/raw/80eafbff7365131bdac7e116efcc7ed4dc5180a7/contactData.json"
+        "https://gist.githubusercontent.com/6bell8/ef6a17fafcf4daf95845740f352faf84/raw/545e0660bfd00cb1ce18f6496bfeb204ab4121b2/contactData.json"
       )
       .then((res) => setInfo(res.data))
       .catch((err) => console.log(err));
   }, []);
+
+  info.sort((a, b) => b.id - a.id);
 
   const handleSave = (data) => {
     if (data.id) {
@@ -36,7 +38,12 @@ const Contact = () => {
               }
             : row
         )
-      );
+      ).sort((a, b) => {
+        if (a.id > b.id) return -1;
+        if (a.id < b.id) return 1;
+
+        return 0;
+      });
     } else {
       setInfo((info) =>
         info.concat({

@@ -7,7 +7,8 @@ let data = [
     title: "White and Black",
     content: "Born in France",
     price: 120000,
-    img: "../subBg01.jpg", //public 폴더에 있을 때 이렇게 표시
+    img: "https://codingapple1.github.io/shop/shoes1.jpg",
+    // img: "/subBg03.jpg",  public 폴더에 있을 때 이렇게 표시
     cord: 0,
   },
 
@@ -16,7 +17,7 @@ let data = [
     title: "Red Knit",
     content: "Born in Seoul",
     price: 110000,
-    img: "/subBg02.jpg",
+    img: "https://codingapple1.github.io/shop/shoes2.jpg",
     cord: 1,
   },
 
@@ -25,7 +26,7 @@ let data = [
     title: "Grey Yordan",
     content: "Born in the States",
     price: 130000,
-    img: "/subBg03.jpg",
+    img: "https://codingapple1.github.io/shop/shoes3.jpg",
     cord: 2,
   },
 ];

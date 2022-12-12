@@ -30,8 +30,7 @@ const Post = ({ onSaveData }) => {
 
   return (
     <>
-      <div className="">
-        고객 추가하기
+      <div className="post">
         <form
           className="'text-xl font-bold mt-5 mb-2 text-center'"
           onSubmit={handleSubmit}
@@ -42,7 +41,7 @@ const Post = ({ onSaveData }) => {
               className="w-full flex-1 mx-2 text-xs font-semibold 
                     text-gray-600 uppercase"
             >
-              Name
+              이름
               <input
                 className="w-full py-3 px-1 mt-1 
                     text-gray-800 appearance-none 
@@ -57,42 +56,43 @@ const Post = ({ onSaveData }) => {
               />
             </label>
             <label
-              htmlFor="qa"
+              htmlFor="phone"
               className="w-full flex-1 mx-2 text-xs font-semibold 
                     text-gray-600 uppercase"
             >
-              문의사항
+              연락처
               <input
                 className="w-full py-3 px-1 mt-1 
                     text-gray-800 appearance-none 
                     border-2 border-gray-100
                     focus:text-gray-500 focus:outline-none focus:border-gray-200"
                 required
-                placeholder="이메일 주소를 입력해주세요."
-                type="qa"
-                name="qa"
-                value={form.qa}
+                placeholder="연락처를 입력해주세요."
+                type="phone"
+                name="phone"
+                value={form.phone}
                 onChange={handleChange}
               ></input>
             </label>
           </div>
           <div className="flex flex-col md:flex-row">
             <label
-              htmlFor="phone"
+              htmlFor="qa"
               className="w-full flex-1 mx-2 text-xs font-semibold 
                     text-gray-600 uppercase"
             >
-              Phone
+              Q & A
               <input
                 className="w-full py-3 px-1 mt-1 
                     text-gray-800 appearance-none 
                     border-2 border-gray-100
-                    focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                    focus:text-gray-500 focus:outline-none focus:border-gray-200
+                    question"
                 required
-                placeholder="핸드폰 번호를 입력해주세요."
-                type="text"
-                name="phone"
-                value={form.phone}
+                placeholder="문의사항을 입력해주세요."
+                type="qa"
+                name="qa"
+                value={form.qa}
                 onChange={handleChange}
               ></input>
             </label>
