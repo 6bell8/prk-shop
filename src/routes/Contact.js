@@ -30,33 +30,27 @@ const Contact = () => {
           data.id === row.id
             ? {
                 id: data.id,
-                username: data.username,
-                qa: data.qa,
-                email: data.email,
+                name: data.name,
                 phone: data.phone,
-                website: data.website,
+                qa: data.qa,
               }
             : row
         )
-      ).sort((a, b) => {
-        if (a.id > b.id) return -1;
-        if (a.id < b.id) return 1;
-
-        return 0;
-      });
-    } else {
-      setInfo((info) =>
-        info.concat({
-          id: nextId.current,
-          username: data.username,
-          qa: data.qa,
-          email: data.email,
-          phone: data.phone,
-          website: data.website,
-        })
       );
-      nextId.current += 1;
+    } else {
+      setInfo((prev) => {
+        return [
+          ...prev,
+          {
+            id: data.id,
+            name: data.name,
+            phone: data.phone,
+            qa: data.qa,
+          },
+        ];
+      });
     }
+    nextId.current += 1;
   };
 
   const handleRemove = (id) => {
@@ -104,13 +98,13 @@ const Contact = () => {
         <Tr info={info} handleRemove={handleRemove} handleEdit={handleEdit} />
       </table>
       <Post onSaveData={handleSave} />
-      {/* {modalOn && (
+      {modalOn && (
         <Modal
           selectedData={selected}
           handleCancel={handleCancel}
           handleEditSubmit={handleEditSubmit}
         />
-      )} */}
+      )}
     </div>
   );
 };
