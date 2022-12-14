@@ -30,27 +30,28 @@ const Contact = () => {
           data.id === row.id
             ? {
                 id: data.id,
-                name: data.name,
-                phone: data.phone,
+                username: data.username,
                 qa: data.qa,
+                email: data.email,
+                phone: data.phone,
+                website: data.website,
               }
             : row
         )
       );
     } else {
-      setInfo((prev) => {
-        return [
-          ...prev,
-          {
-            id: data.id,
-            name: data.name,
-            phone: data.phone,
-            qa: data.qa,
-          },
-        ];
-      });
+      setInfo((info) =>
+        info.concat({
+          id: nextId.current,
+          username: data.username,
+          qa: data.qa,
+          email: data.email,
+          phone: data.phone,
+          website: data.website,
+        })
+      );
+      nextId.current += 1;
     }
-    nextId.current += 1;
   };
 
   const handleRemove = (id) => {
@@ -67,7 +68,6 @@ const Contact = () => {
       phone: item.phone,
       website: item.website,
     };
-    console.log(selectedData);
     setSelected(selectedData);
   };
 
@@ -76,7 +76,6 @@ const Contact = () => {
   };
 
   const handleEditSubmit = (item) => {
-    console.log(item);
     handleSave(item);
     setModalOn(false);
   };

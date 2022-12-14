@@ -4,9 +4,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const Td = ({ item, handleRemove, handleEdit }) => {
-  const onEdit = () => {
-    handleEdit(item);
-  };
+  // let navigate = useNavigate();
 
   const onRemove = (e) => {
     if (window.confirm("삭제하시겠습니까?")) {
@@ -15,6 +13,10 @@ const Td = ({ item, handleRemove, handleEdit }) => {
     } else {
       alert("취소합니다.");
     }
+  };
+
+  const onEdit = () => {
+    handleEdit(item);
   };
 
   return (

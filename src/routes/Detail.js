@@ -100,9 +100,12 @@ function Detail(props) {
             className="btn btn-danger"
             onClick={() => {
               {
-                dispatch(order);
-                confirm("주문 하시겠습니까?");
-                navigate("/cart");
+                if (window.confirm("주문 하시겠습니까?")) {
+                  dispatch(order);
+                  navigate("/cart");
+                } else {
+                  alert("취소합니다.");
+                }
               }
             }}
           >

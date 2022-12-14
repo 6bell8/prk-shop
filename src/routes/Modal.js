@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-const Modal = ({ selectedData, handleCancel, handEditSubmit }) => {
+const Modal = ({ selectedData, handleCancel, handleEditSubmit }) => {
   const [edited, setEdited] = useState(selectedData);
 
   const onCancel = () => {
@@ -18,14 +18,14 @@ const Modal = ({ selectedData, handleCancel, handEditSubmit }) => {
 
   const onSubmitEdit = (e) => {
     e.preventDefault();
-    handEditSubmit(edited);
+    handleEditSubmit(edited);
   };
 
   const handleEdit = (item) => {
     setModalOn(true);
     const selectedData = {
       id: item.id,
-      username: item.username,
+      name: item.name,
       email: item.email,
       phone: item.phone,
     };
@@ -38,40 +38,42 @@ const Modal = ({ selectedData, handleCancel, handEditSubmit }) => {
       className="h-screen w-full fixed left-0 top-0 flex justify-center items-center 
     bg-black bg-opacity-50"
     >
-      <div className="bg-white rounded shadow-lg w-10/12 md:w-1/3">
+      <div className="bg-white rounded shadow-lg w-10/12 md:w-1/2">
         <div className="border-b px-4 py-2 flex justify-between items-center">
-          <h3 className="font-semibold text-lg">게시판 수정 하기</h3>
-          <i className="fas fa-times cursor-pointer" onClick={onCancel}></i>
+          <h3 className="font-semibold text-lg">문의사항 수정 하기</h3>
+          <span class="material-symbols-outlined" onClick={onCancel}>
+            close
+          </span>
         </div>
         <form onSubmit={onSubmitEdit}>
           <div className="p-3">
-            <div>ID: {edited.id}</div>
             <div>
-              Name
+              <span className="title">Name</span>
               <input
-                className="border-2 border-gray-100"
+                className="border-2 border-gray-100 "
                 type="text"
                 name="username"
-                value={edited.name}
+                value={edited.username}
                 onChange={onEditChange}
               />
             </div>
             <div>
-              phone
+              <span className="title">phone</span>
               <input
                 className="border-2 border-gray-100"
                 type="text"
-                name="username"
+                name="phone"
+                maxlength="20"
                 value={edited.phone}
                 onChange={onEditChange}
               />
             </div>
-            <div>
-              Q & A
-              <input
-                className="border-2 border-gray-100"
+            <div className="qaBackform">
+              <span className="title ">Q & A</span>
+              <textarea
+                className="border-2 border-gray-100 backform"
                 type="text"
-                name="username"
+                name="qa"
                 value={edited.qa}
                 onChange={onEditChange}
               />
@@ -84,13 +86,15 @@ const Modal = ({ selectedData, handleCancel, handEditSubmit }) => {
               >
                 취소
               </button>
-              <button
-                className="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-white 
-            mr-1 close-modal"
-                onClick={onCancel}
-              >
-                수정
-              </button>
+              {
+                <button
+                  type="submit"
+                  className="bg-blue-600 hover:bg-blue-700 px-3 py-1 
+                rounded text-white"
+                >
+                  수정
+                </button>
+              }
             </div>
           </div>
         </form>
