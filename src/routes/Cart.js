@@ -3,14 +3,13 @@
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { changeName, changeAge } from "./../store/userSlice";
-import { addCount, removeItem } from "./../Store";
+import { addCount, minusCount, removeItem } from "./../Store";
 import { memo, useMemo, useState } from "react";
 
 function Cart() {
   let state = useSelector((state) => state);
 
   let dispatch = useDispatch();
-
   return (
     <div>
       <h6>
@@ -41,22 +40,33 @@ function Cart() {
               <td>{state.product[i].id}</td>
               <td>{state.product[i].name}</td>
               <td>
+                <button
+                  onClick={() => {
+                    state.product[i].count == 1
+                      ? e.preventDefault()
+                      : dispatch(minusCount(state.product[i].id));
+                  }}
+                >
+                  <span className="material-icons">remove</span>
+                </button>
                 {state.product[i].count}{" "}
                 <button
                   onClick={() => {
                     dispatch(addCount(state.product[i].id));
                   }}
                 >
-                  +
+                  <span className="material-icons">add</span>
                 </button>
               </td>
               <td>
                 <button
                   onClick={() => {
-                    dispatch(removeItem(state.product[i].id));
+                    if (window.confirm("삭제하시겠습니까?")) {
+                      dispatch(removeItem(state.product[i].id));
+                    }
                   }}
                 >
-                  delete
+                  <span class="material-icons delete">delete</span>
                 </button>
               </td>
             </tr>

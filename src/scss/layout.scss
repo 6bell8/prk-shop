@@ -197,6 +197,15 @@ p {
   thead {
     border-bottom: solid 1px #ccc;
   }
+  td {
+    font-size: 22px;
+    span {
+      padding: 2.5px 15px;
+    }
+    .delete {
+      color: rgb(120, 106, 109);
+    }
+  }
 }
 
 .detail {

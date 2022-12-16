@@ -35,17 +35,23 @@ function Detail(props) {
   useEffect(() => {
     let 꺼낸거 = localStorage.getItem("watched");
     let 꺼낸거2 = localStorage.getItem("watched2");
+    let 꺼낸거3 = localStorage.getItem("watched3");
     꺼낸거 = JSON.parse(꺼낸거);
     꺼낸거2 = JSON.parse(꺼낸거2);
+    꺼낸거3 = JSON.parse(꺼낸거3);
     꺼낸거.unshift(찾은상품.img);
     꺼낸거2.unshift(찾은상품.title);
+    꺼낸거3.unshift(찾은상품.id);
     꺼낸거 = new Set(꺼낸거);
     꺼낸거2 = new Set(꺼낸거2);
+    꺼낸거3 = new Set(꺼낸거3);
     꺼낸거 = Array.from(꺼낸거);
     꺼낸거2 = Array.from(꺼낸거2);
+    꺼낸거3 = Array.from(꺼낸거3);
 
     localStorage.setItem("watched", JSON.stringify(꺼낸거));
     localStorage.setItem("watched2", JSON.stringify(꺼낸거2));
+    localStorage.setItem("watched3", JSON.stringify(꺼낸거3));
   }, []);
 
   let [count, setCount] = useState(0);

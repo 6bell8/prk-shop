@@ -230,6 +230,18 @@ p {
   border-bottom: solid 1px #ccc;
 }
 
+.table td {
+  font-size: 22px;
+}
+
+.table td span {
+  padding: 2.5px 15px;
+}
+
+.table td .delete {
+  color: #786a6d;
+}
+
 .detail {
   padding-top: clamp(50px, 10vh, 100px);
 }

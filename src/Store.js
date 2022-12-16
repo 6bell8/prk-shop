@@ -21,6 +21,12 @@ let product = createSlice({
       });
       state[번호].count++;
     },
+    minusCount(state, action) {
+      let 번호 = state.findIndex((a) => {
+        return a.id == action.payload;
+      });
+      state[번호].count--;
+    },
 
     addItem(state, action) {
       state.push(action.payload);
@@ -41,7 +47,8 @@ let product = createSlice({
   },
 });
 
-export let { addCount, addItem, removeItem, addQuantity } = product.actions;
+export let { addCount, minusCount, addItem, removeItem, addQuantity } =
+  product.actions;
 
 export default configureStore({
   reducer: {

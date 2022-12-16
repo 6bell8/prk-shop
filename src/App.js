@@ -20,6 +20,8 @@ function App() {
   localStorage.setItem("data", JSON.stringify(obj));
   let 꺼낸거 = JSON.parse(localStorage.getItem("watched"));
   let 꺼낸거2 = JSON.parse(localStorage.getItem("watched2"));
+  let 꺼낸거3 = JSON.parse(localStorage.getItem("watched3"));
+  꺼낸거.length <= 3;
 
   let result = useQuery("작명", () => {
     return axios
@@ -41,6 +43,9 @@ function App() {
     }
     if (localStorage.getItem("watched2") === null) {
       localStorage.setItem("watched2", JSON.stringify([]));
+    }
+    if (localStorage.getItem("watched3") === null) {
+      localStorage.setItem("watched3", JSON.stringify([]));
     }
   }, []);
 
@@ -144,7 +149,11 @@ function App() {
                     ? 꺼낸거.map((a, i) => {
                         return (
                           <div className="watchedItem" key={i}>
-                            <Nav.Link href={"/detail/" + i}>
+                            <Nav.Link
+                              onClick={() => {
+                                navigate("/detail/" + 꺼낸거3[i]);
+                              }}
+                            >
                               <img
                                 src={`${꺼낸거[i]}`}
                                 className="localImg"
