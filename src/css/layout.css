@@ -169,6 +169,11 @@ p {
   max-width: 1280px;
 }
 
+.App .max-w-screen-lg .text-xl {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
 .App .max-w-screen-lg .text-xl .min-w-full .text-gray-300 {
   font-size: 18px;
 }
@@ -202,6 +207,101 @@ p {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.App .coupon01 {
+  margin: 30px auto;
+}
+
+.App .eventTitle01 {
+  font-size: 32px;
+  margin: 30px;
+}
+
+.App .eventTitle02 {
+  font-size: 24px;
+  font-weight: 500;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #111;
+}
+
+.App .cartTitle {
+  font-size: 26px;
+  font-weight: 500;
+  margin: 20px 0 40px 0;
+}
+
+.App .review .reviewImages {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 2rem;
+  margin: 100px auto;
+  width: 60%;
+}
+
+.App .review .reviewImage {
+  width: 30%;
+  height: 30%;
+  color: #fff;
+  border-radius: 10px;
+  -webkit-box-shadow: 3px 3px 3px #ccc;
+          box-shadow: 3px 3px 3px #ccc;
+  overflow: hidden;
+}
+
+.App .review img {
+  display: block;
+  width: 100%;
+}
+
+.App .review .pagenation {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 5rem;
+  font-size: 1.2rem;
+  gap: 5px;
+}
+
+.App .review .pagenation .active {
+  border: 3px solid #6e6e6e;
+}
+
+.App .review .pagenation .page-num {
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-weight: 400;
+}
+
+.App .review .pagenation .page-num:hover {
+  border: 3px solid #6e6e6e;
+  color: #111111;
+  -webkit-transition: 0.25s all ease-in-out;
+  transition: 0.25s all ease-in-out;
+}
+
+.App .review .reviewTitle {
+  font-size: 17px;
+  color: #111;
+  padding: 10px;
+}
+
+.App .loading {
+  font-size: 24px;
 }
 
 .start {

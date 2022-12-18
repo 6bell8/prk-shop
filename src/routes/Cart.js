@@ -12,16 +12,7 @@ function Cart() {
   let dispatch = useDispatch();
   return (
     <div>
-      <h6>
-        {state.user.name} {state.user.age}의 장바구니
-      </h6>
-      <button
-        onClick={() => {
-          dispatch(changeAge(100));
-        }}
-      >
-        버튼
-      </button>
+      <h6 className="cartTitle">{state.user.name}님의 장바구니</h6>
 
       <Table>
         <thead>

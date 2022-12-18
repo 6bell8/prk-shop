@@ -5,6 +5,7 @@ import { useState, useEffect, createContext, lazy, Suspense } from "react";
 import "./App.css";
 import "./css/layout.css";
 import bg from "./img/shoe.png";
+import coupon from "./img/coupon.png";
 import data from "./data.js";
 import data2 from "./data2.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
@@ -14,6 +15,8 @@ import { useQuery } from "react-query";
 const Detail = lazy(() => import("./routes/Detail"));
 const Cart = lazy(() => import("./routes/Cart"));
 const Contact = lazy(() => import("./routes/Contact"));
+const Review = lazy(() => import("./routes/Review"));
+const Coupon = lazy(() => import("./routes/Coupon"));
 
 function App() {
   let obj = { name: "kim" };
@@ -21,7 +24,6 @@ function App() {
   let 꺼낸거 = JSON.parse(localStorage.getItem("watched"));
   let 꺼낸거2 = JSON.parse(localStorage.getItem("watched2"));
   let 꺼낸거3 = JSON.parse(localStorage.getItem("watched3"));
-  꺼낸거.length <= 3;
 
   let result = useQuery("작명", () => {
     return axios
@@ -57,12 +59,9 @@ function App() {
 
   let [shoes, setShoes] = useState(data);
   let [재고] = useState([10, 11, 12]);
-  let [isAdd, setIsAdd] = useState([]);
-  let [loading, setLoading] = useState(false);
   let [fade, setFade] = useState("");
   let [plus, setPlus] = useState(0);
   let [count, setCount] = useState(2);
-  let [shoesAll, setShoesAll] = useState(data);
   let [view, setView] = useState(true);
   let navigate = useNavigate();
 
@@ -117,6 +116,13 @@ function App() {
             </Nav.Link>{" "}
             <Nav.Link
               onClick={() => {
+                navigate("/review");
+              }}
+            >
+              Review
+            </Nav.Link>{" "}
+            <Nav.Link
+              onClick={() => {
                 navigate("/contact");
               }}
             >
@@ -132,7 +138,7 @@ function App() {
         </Container>
       </Navbar>
 
-      <Suspense fallback={<div>로딩중</div>}>
+      <Suspense fallback={<div className="loading">로딩중</div>}>
         <Routes>
           <Route
             path="/"
@@ -207,13 +213,11 @@ function App() {
             <Route path="location" element={<div>위치정보</div>} />
           </Route>
           <Route path="/event" element={<Event />}>
-            <Route
-              path="one"
-              element={<div>첫 주문 시 적립금 5000원</div>}
-            ></Route>
+            <Route path="one" element={<Coupon />}></Route>
             <Route path="two" element={<div>생일기념 쿠폰받기</div>}></Route>
           </Route>
           <Route path="*" element={<div>없는 페이지입니다.</div>} />
+          <Route path="/review" element={<Review />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </Suspense>
@@ -235,13 +239,13 @@ function Event() {
 
   return (
     <div>
-      <h4>오늘의 이벤트</h4>
+      <p className="eventTitle01">오늘의 이벤트</p>
       <button
         onClick={() => {
           navigate("one");
         }}
       >
-        첫번째
+        <p className="eventTitle02">첫번째</p>
       </button>
       <Outlet></Outlet>
     </div>
