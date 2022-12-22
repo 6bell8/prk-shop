@@ -7,7 +7,6 @@ import "./css/layout.css";
 import bg from "./img/shoe.png";
 import coupon from "./img/coupon.png";
 import data from "./data.js";
-import data2 from "./data2.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import axios from "axios";
 import { useQuery } from "react-query";
@@ -24,6 +23,10 @@ function App() {
   let 꺼낸거 = JSON.parse(localStorage.getItem("watched"));
   let 꺼낸거2 = JSON.parse(localStorage.getItem("watched2"));
   let 꺼낸거3 = JSON.parse(localStorage.getItem("watched3"));
+
+  axios.get("http://localhost:1337/api/shops").then((response) => {
+    console.log(response);
+  });
 
   let result = useQuery("작명", () => {
     return axios
@@ -138,7 +141,14 @@ function App() {
         </Container>
       </Navbar>
 
-      <Suspense fallback={<div className="loading">로딩중</div>}>
+      <Suspense
+        fallback={
+          <div className="loading">
+            <h3>로딩 중 입니다.</h3>
+            <h5>잠시만 기다려주세요.</h5>
+          </div>
+        }
+      >
         <Routes>
           <Route
             path="/"
