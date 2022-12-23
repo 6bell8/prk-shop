@@ -34,6 +34,11 @@ p {
   margin-bottom: 20px;
 }
 
+.App .navbar .container .msAuto {
+  font-size: 17px;
+  font-weight: 400;
+}
+
 .App .navbar .container .navbar-brand {
   letter-spacing: 0.8px;
   font-weight: 400;
@@ -300,14 +305,15 @@ p {
   padding: 10px;
 }
 
-.App .loading {
+.App .loading h3 {
   font-size: 24px;
+  margin-bottom: 15px;
 }
 
 .App .loading h5 {
+  font-size: 18px;
   font-weight: 300;
   color: #999999;
-  font-size: 18px;
 }
 
 .start {

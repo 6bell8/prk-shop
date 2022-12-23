@@ -5,8 +5,9 @@ import { useState, useEffect, createContext, lazy, Suspense } from "react";
 import "./App.css";
 import "./css/layout.css";
 import bg from "./img/shoe.png";
-import coupon from "./img/coupon.png";
 import data from "./data.js";
+import { Login } from "./routes/Login";
+import { Resister } from "./routes/Resister";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import axios from "axios";
 import { useQuery } from "react-query";
@@ -17,6 +18,16 @@ const Contact = lazy(() => import("./routes/Contact"));
 const Review = lazy(() => import("./routes/Review"));
 const Coupon = lazy(() => import("./routes/Coupon"));
 
+let result = useQuery("작명", () => {
+  return axios
+    .get(
+      "https://gist.githubusercontent.com/6bell8/c2b4dcb1c92bb4ad2eda5726cdc808b2/raw/cc663f107eba9588f6ec45e0e3ce660ab0d9776f/user.json"
+    )
+    .then((a) => {
+      return a.data;
+    });
+});
+
 function App() {
   let obj = { name: "kim" };
   localStorage.setItem("data", JSON.stringify(obj));
@@ -24,6 +35,7 @@ function App() {
   let 꺼낸거2 = JSON.parse(localStorage.getItem("watched2"));
   let 꺼낸거3 = JSON.parse(localStorage.getItem("watched3"));
 
+  // 로그인 데이터
   axios.get("http://localhost:1337/api/shops").then((response) => {
     console.log(response);
   });
@@ -66,7 +78,10 @@ function App() {
   let [plus, setPlus] = useState(0);
   let [count, setCount] = useState(2);
   let [view, setView] = useState(true);
+  let [modalOn, setModalOn] = useState(false);
   let navigate = useNavigate();
+
+
 
   useEffect(() => {
     setTimeout(() => {
@@ -134,9 +149,16 @@ function App() {
           </Nav>
 
           <Nav className="msAuto">
-            반갑습니다. {result.isLoading && "로딩중"}
+            {/* 반갑습니다. {result.isLoading && "로딩중"}
             {result.error && "에러"}
-            {result.data && result.data.name}
+            {result.data && result.data.name} */}
+            <button
+            // onClick={() => {
+            //   navigate("/login");
+            // }}
+            >
+              로그인
+            </button>
           </Nav>
         </Container>
       </Navbar>
