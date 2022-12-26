@@ -1,16 +1,24 @@
 /* eslint-disable */
 
 import { Button, Navbar, Container, Nav, Row, Col } from "react-bootstrap";
-import { useState, useEffect, createContext, lazy, Suspense } from "react";
+import {
+  useState,
+  useEffect,
+  createContext,
+  lazy,
+  Suspense,
+  useRef,
+} from "react";
+import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
+import { useQuery } from "react-query";
 import "./App.css";
 import "./css/layout.css";
 import bg from "./img/shoe.png";
 import data from "./data.js";
-import { Login } from "./routes/Login";
-import { Resister } from "./routes/Resister";
-import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
+import Main from "./components/Main/index";
+import Signup from "./components/Signup/index";
+import Login from "./components/Login/index";
 import axios from "axios";
-import { useQuery } from "react-query";
 
 const Detail = lazy(() => import("./routes/Detail"));
 const Cart = lazy(() => import("./routes/Cart"));
@@ -18,27 +26,14 @@ const Contact = lazy(() => import("./routes/Contact"));
 const Review = lazy(() => import("./routes/Review"));
 const Coupon = lazy(() => import("./routes/Coupon"));
 
-let result = useQuery("작명", () => {
-  return axios
-    .get(
-      "https://gist.githubusercontent.com/6bell8/c2b4dcb1c92bb4ad2eda5726cdc808b2/raw/cc663f107eba9588f6ec45e0e3ce660ab0d9776f/user.json"
-    )
-    .then((a) => {
-      return a.data;
-    });
-});
-
 function App() {
+  const user = localStorage.getItem("token");
+
   let obj = { name: "kim" };
   localStorage.setItem("data", JSON.stringify(obj));
   let 꺼낸거 = JSON.parse(localStorage.getItem("watched"));
   let 꺼낸거2 = JSON.parse(localStorage.getItem("watched2"));
   let 꺼낸거3 = JSON.parse(localStorage.getItem("watched3"));
-
-  // 로그인 데이터
-  axios.get("http://localhost:1337/api/shops").then((response) => {
-    console.log(response);
-  });
 
   let result = useQuery("작명", () => {
     return axios
@@ -80,8 +75,6 @@ function App() {
   let [view, setView] = useState(true);
   let [modalOn, setModalOn] = useState(false);
   let navigate = useNavigate();
-
-
 
   useEffect(() => {
     setTimeout(() => {
@@ -153,12 +146,22 @@ function App() {
             {result.error && "에러"}
             {result.data && result.data.name} */}
             <button
-            // onClick={() => {
-            //   navigate("/login");
-            // }}
+              onClick={() => {
+                navigate("/login");
+              }}
             >
               로그인
             </button>
+            <Routes>
+              {user && <Route path="/" exact element={<Main />} />}
+              <Route path="/signup" exact element={<Signup />} />
+              <Route path="/login" exact element={<Login />} />
+              {/* <Routes
+                path="/login"
+                exact
+                element={<avigate replace to="/login" />}
+              /> */}
+            </Routes>
           </Nav>
         </Container>
       </Navbar>
