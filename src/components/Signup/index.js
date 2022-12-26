@@ -1,32 +1,29 @@
-/* eslint-disable */
-
-// import styles from "./styles/module.css";
-// import "./css/layout.css";
-import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import styles from "./styles.module.css";
 
 const Signup = () => {
-  let navigate = useNavigate();
-  let [data, setData] = useState({
+  const [data, setData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
   });
-  let [error, setError] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  let handleChange = ({ currentTarget: input }) => {
+  const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
   };
 
-  let handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const url = "http://localhost:8080/api/users";
       const { data: res } = await axios.post(url, data);
-      console.log(res.message);
       navigate("/login");
+      console.log(res.message);
     } catch (error) {
       if (
         error.response &&
@@ -42,55 +39,59 @@ const Signup = () => {
     <div className={styles.signup_container}>
       <div className={styles.signup_form_container}>
         <div className={styles.left}>
-          <h1>Welcome Back</h1>
+          <h1>환영합니다.</h1>
+
           <button
+            type="button"
+            className={styles.white_btn}
             onClick={() => {
               navigate("/login");
             }}
-            type="button"
-            className={styles.white_btn}
           >
-            로그인{" "}
+            로그인
           </button>
         </div>
         <div className={styles.right}>
           <form className={styles.form_container} onSubmit={handleSubmit}>
-            <h1>회원가입 </h1>
+            <h1>회원가입</h1>
             <input
               type="text"
-              placeholder="성을 입력하세요."
+              placeholder="First Name"
               name="firstName"
               onChange={handleChange}
               value={data.firstName}
+              required
               className={styles.input}
             />
             <input
               type="text"
-              placeholder="이름을 입력하세요."
+              placeholder="Last Name"
               name="lastName"
               onChange={handleChange}
               value={data.lastName}
+              required
               className={styles.input}
             />
             <input
               type="email"
-              placeholder="이메일을 입력하세요."
+              placeholder="Email"
               name="email"
               onChange={handleChange}
               value={data.email}
+              required
               className={styles.input}
             />
             <input
               type="password"
-              placeholder="비밀번호를 입력하세요."
+              placeholder="Password"
               name="password"
               onChange={handleChange}
               value={data.password}
+              required
               className={styles.input}
             />
-            {error && <div className={style.error_msg}>{error}</div>}
+            {error && <div className={styles.error_msg}>{error}</div>}
             <button type="submit" className={styles.green_btn}>
-              {" "}
               회원가입
             </button>
           </form>

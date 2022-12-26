@@ -1,7 +1,6 @@
 /* eslint-disable */
 
-// import styles from "./styles/module.css";
-// import "./css/layout.css";
+import styles from "./styles.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
@@ -59,10 +58,9 @@ const Signup = () => {
               value={data.password}
               className={styles.input}
             />
-            {error && <div className={style.error_msg}>{error}</div>}
+            {error && <div className={styles.error_msg}>{error}</div>}
             <button type="submit" className={styles.green_btn}>
-              {" "}
-              회원가입
+              로그인
             </button>
           </form>
         </div>

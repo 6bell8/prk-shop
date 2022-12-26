@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-// import styles from "./styles/module.css";
+import styles from "./styles.module.css";
 
 const Main = () => {
   const handleLogout = () => {

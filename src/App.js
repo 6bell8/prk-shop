@@ -35,19 +35,24 @@ function App() {
   let 꺼낸거2 = JSON.parse(localStorage.getItem("watched2"));
   let 꺼낸거3 = JSON.parse(localStorage.getItem("watched3"));
 
-  let result = useQuery("작명", () => {
-    return axios
-      .get(
-        "https://gist.githubusercontent.com/6bell8/c2b4dcb1c92bb4ad2eda5726cdc808b2/raw/cc663f107eba9588f6ec45e0e3ce660ab0d9776f/user.json"
-      )
-      .then((a) => {
-        return a.data;
-      });
-  });
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
 
-  result.data;
-  result.isLoading;
-  result.error;
+  // let result = useQuery("작명", () => {
+  //   return axios
+  //     .get(
+  //       "https://gist.githubusercontent.com/6bell8/c2b4dcb1c92bb4ad2eda5726cdc808b2/raw/cc663f107eba9588f6ec45e0e3ce660ab0d9776f/user.json"
+  //     )
+  //     .then((a) => {
+  //       return a.data;
+  //     });
+  // });
+
+  // result.data;
+  // result.isLoading;
+  // result.error;
 
   useEffect(() => {
     if (localStorage.getItem("watched") === null) {
@@ -150,18 +155,12 @@ function App() {
                 navigate("/login");
               }}
             >
-              로그인
+              {!user ? (
+                <div>로그인</div>
+              ) : (
+                user && <div onClick={handleLogout}>로그아웃</div>
+              )}
             </button>
-            <Routes>
-              {user && <Route path="/" exact element={<Main />} />}
-              <Route path="/signup" exact element={<Signup />} />
-              <Route path="/login" exact element={<Login />} />
-              {/* <Routes
-                path="/login"
-                exact
-                element={<avigate replace to="/login" />}
-              /> */}
-            </Routes>
           </Nav>
         </Container>
       </Navbar>
@@ -238,6 +237,14 @@ function App() {
                 ) : null}
               </>
             }
+          />
+
+          <Route path="/signup" exact element={<Signup />} />
+          <Route path="/login" exact element={<Login />} />
+          <Route
+            path="/login"
+            exact
+            element={<navigate replace to="/login" />}
           />
 
           <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
