@@ -25,9 +25,9 @@ export default function Images(props) {
   return (
     <>
       <div className="reviewImages">
-        {currentItems.map((image) => {
+        {currentItems.map((image, i) => {
           return (
-            <div className="reviewImage">
+            <div className="reviewImage" key={i}>
               <img src={image.url} alt={image.title} />
               <h3 className="reviewTitle">{image.title}</h3>
             </div>

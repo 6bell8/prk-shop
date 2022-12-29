@@ -241,11 +241,11 @@ function App() {
 
           <Route path="/signup" exact element={<Signup />} />
           <Route path="/login" exact element={<Login />} />
-          <Route
+          {/* <Route
             path="/login"
             exact
             element={<navigate replace to="/login" />}
-          />
+          /> */}
 
           <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
           <Route path="/cart" element={<Cart />} />
