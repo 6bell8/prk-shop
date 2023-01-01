@@ -33,7 +33,10 @@ p {
       margin-bottom: 20px;
       .msAuto {
         font-size: 17px;
-        font-weight: 400;
+        font-weight: 500;
+        border: 1.5px solid #bbb;
+        border-radius: 20px;
+        padding: 7px 20px;
       }
       .navbar-brand {
         letter-spacing: 0.8px;

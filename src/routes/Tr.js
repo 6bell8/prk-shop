@@ -3,7 +3,7 @@
 import React from "react";
 import Td from "./Td";
 
-const Tr = ({ info, handleRemove, handleEdit }) => {
+const Tr = ({ info, handleRemove, handleEdit, query }) => {
   return (
     <tbody>
       {info.map((item) => {

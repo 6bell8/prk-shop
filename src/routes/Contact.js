@@ -11,7 +11,22 @@ const Contact = () => {
   const [info, setInfo] = useState([]);
   const [selected, setSelected] = useState("");
   const [modalOn, setModalOn] = useState(false);
+  const [query, setQuery] = useState("");
   const nextId = useRef(11);
+
+  // console.log(
+  //   info.filter((info) => info.username.toLowerCase().includes("del"))
+  // );
+
+  const search = (info) => {
+    return info.filter(
+      (item) =>
+        item.username.toLowerCase().includes(query) ||
+        item.qa.toLowerCase().includes(query) ||
+        item.phone.toLowerCase().includes(query)
+    );
+  };
+
   useEffect(() => {
     axios
       .get(
@@ -83,7 +98,17 @@ const Contact = () => {
   return (
     <div className="container max-w-screen-lg mx-auto">
       <div className="text-xl font-bold mt-5 mb-3 text-center">문의 사항</div>
-      <table className="min-w-full table-auto text-gray-800">
+      <select className="text-l  mt-2 mb-2 text-center">
+        <option className="">문의 사항</option>
+        <option className="">문의 사항</option>
+      </select>
+      <input
+        type="text"
+        className="search border-2 border-gray-200"
+        placeholder="검색"
+        onChange={(e) => setQuery(e.target.value)}
+      />
+      <table className="list min-w-full table-auto text-gray-800">
         <thead className="justify-between">
           <tr className="bg-gray-800">
             <th className="text-gray-300 px-4 py-3">번호</th>
@@ -94,7 +119,13 @@ const Contact = () => {
             <th className="text-gray-300 px-4 py-3">삭제</th>
           </tr>
         </thead>
-        <Tr info={info} handleRemove={handleRemove} handleEdit={handleEdit} />
+        <Tr
+          info={search(info)}
+          handleRemove={handleRemove}
+          handleEdit={handleEdit}
+          query={query}
+          className="listItem"
+        />
       </table>
       <Post onSaveData={handleSave} />
       {modalOn && (

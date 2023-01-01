@@ -22,6 +22,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border-top: 2px solid #ccc;
+  border-left: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
   background-color: white;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -66,7 +69,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #3bb19b;
+  background: rgb(245, 245, 245);
+  border: 2.5px solid #dddddd;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -85,6 +89,7 @@
   padding: 12px 0;
   background-color: white;
   border-radius: 20px;
+  border: 2px solid #dddddd;
   width: 180px;
   font-weight: bold;
   font-size: 14px;
@@ -92,7 +97,19 @@
 }
 
 .green_btn {
-  background-color: #3bb19b;
-  color: white;
+  border: 3px solid #dddddd;
+  color: #111;
   margin: 10px;
+}
+
+.title {
+  font-size: 34px;
+  margin-bottom: 20px;
+}
+.title02 {
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 30px;
 }

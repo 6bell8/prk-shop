@@ -156,9 +156,9 @@ function App() {
               }}
             >
               {!user ? (
-                <div>로그인</div>
+                <div>Login</div>
               ) : (
-                user && <div onClick={handleLogout}>로그아웃</div>
+                user && <div onClick={handleLogout}>Logout</div>
               )}
             </button>
           </Nav>

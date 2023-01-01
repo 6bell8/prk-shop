@@ -39,19 +39,21 @@ const Signup = () => {
     <div className={styles.signup_container}>
       <div className={styles.signup_form_container}>
         <div className={styles.left}>
-          <h1>Welcome Back</h1>
+          <p className={styles.title}>
+            Prk-shop <br />
+          </p>
           <Link to="/login">
             <button type="button" className={styles.white_btn}>
-              Sing in
+              Login
             </button>
           </Link>
         </div>
         <div className={styles.right}>
           <form className={styles.form_container} onSubmit={handleSubmit}>
-            <h1>Create Account</h1>
+            <p className={styles.title02}>회원가입</p>
             <input
               type="text"
-              placeholder="First Name"
+              placeholder="성"
               name="firstName"
               onChange={handleChange}
               value={data.firstName}
@@ -60,7 +62,7 @@ const Signup = () => {
             />
             <input
               type="text"
-              placeholder="Last Name"
+              placeholder="이름"
               name="lastName"
               onChange={handleChange}
               value={data.lastName}
@@ -69,7 +71,7 @@ const Signup = () => {
             />
             <input
               type="email"
-              placeholder="Email"
+              placeholder="이메일"
               name="email"
               onChange={handleChange}
               value={data.email}
@@ -78,7 +80,7 @@ const Signup = () => {
             />
             <input
               type="password"
-              placeholder="Password"
+              placeholder="비밀번호"
               name="password"
               onChange={handleChange}
               value={data.password}
@@ -87,7 +89,7 @@ const Signup = () => {
             />
             {error && <div className={styles.error_msg}>{error}</div>}
             <button type="submit" className={styles.green_btn}>
-              Sing Up
+              가입완료
             </button>
           </form>
         </div>
