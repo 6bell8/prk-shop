@@ -14,16 +14,11 @@ const Contact = () => {
   const [query, setQuery] = useState("");
   const nextId = useRef(11);
 
-  // console.log(
-  //   info.filter((info) => info.username.toLowerCase().includes("del"))
-  // );
+  const keys = ["username", "qa", "phone"];
 
   const search = (info) => {
-    return info.filter(
-      (item) =>
-        item.username.toLowerCase().includes(query) ||
-        item.qa.toLowerCase().includes(query) ||
-        item.phone.toLowerCase().includes(query)
+    return info.filter((item) =>
+      keys.some((key) => item[key].toLowerCase().includes(query))
     );
   };
 
@@ -98,16 +93,15 @@ const Contact = () => {
   return (
     <div className="container max-w-screen-lg mx-auto">
       <div className="text-xl font-bold mt-5 mb-3 text-center">문의 사항</div>
-      <select className="text-l  mt-2 mb-2 text-center">
-        <option className="">문의 사항</option>
-        <option className="">문의 사항</option>
-      </select>
-      <input
-        type="text"
-        className="search border-2 border-gray-200"
-        placeholder="검색"
-        onChange={(e) => setQuery(e.target.value)}
-      />
+
+      <div className="searchBox">
+        <input
+          type="text"
+          className="search"
+          placeholder="검색어를 입력해주세요."
+          onChange={(e) => setQuery(e.target.value)}
+        />
+      </div>
       <table className="list min-w-full table-auto text-gray-800">
         <thead className="justify-between">
           <tr className="bg-gray-800">
@@ -123,7 +117,6 @@ const Contact = () => {
           info={search(info)}
           handleRemove={handleRemove}
           handleEdit={handleEdit}
-          query={query}
           className="listItem"
         />
       </table>

@@ -266,6 +266,21 @@ p {
   }
   .signup {
   }
+  .searchBox {
+    display: flex;
+    justify-content: flex-end;
+    .search {
+      justify-content: flex-end;
+      display: block;
+      margin: 0px 0px 40px 0;
+      width: 220px;
+      height: 50px;
+      border-bottom: 3px solid black;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+  }
 }
 
 .start {
